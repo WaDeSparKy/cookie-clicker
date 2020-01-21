@@ -1,7 +1,8 @@
 {
     "name": "Cookie Clicker",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "animation": "*"
     },
     "description": "",
     "files": [
