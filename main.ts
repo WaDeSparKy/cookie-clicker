@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const Clicker = SpriteKind.create()
+}
 namespace myTiles {
     //% blockIdentity=images._tile
     export const tile0 = img`
@@ -22,7 +25,7 @@ namespace myTiles {
 let Pioche = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
-. . . . f f f f 1 1 e e . 
+. . . . f f f f 1 1 f e . 
 . . . . . . . . e 1 1 f . 
 . . . . . . . e e e 1 1 f 
 . . . . . . e e e . f 1 f 
@@ -109,6 +112,40 @@ tiles.setTilemap(tiles.createTilemap(
             [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0],
             TileScale.Sixteen
         ))
+let Clicker = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . 
+. . . . . . . . . . . . . . f 1 b 1 1 b f . . . . . . . . . . . 
+. . . . . . . . . . . . . f 1 1 b b 1 b b f f . . . . . . . . . 
+. . . . . . . . . . . . . f 1 1 1 1 b 1 b b c f . . . . . . . . 
+. . . . . . . . . . f f f 1 d d 1 1 b b b b c c f . . . . . . . 
+. . . . . . . . f f 1 1 b 1 d d 1 b b 1 b b c c f . . . . . . . 
+. . . . . . . f f b b b b 1 1 1 d 1 1 1 b b c c c f . . . . . . 
+. . . . . . . f 1 1 1 1 1 b b 1 1 d 1 d d b b c c f . . . . . . 
+. . . . . . f b b 1 d d 1 b 1 1 1 1 d b b b b c c f . . . . . . 
+. . . . . . f b b c b d 1 b 1 1 b b d d d b b b c f . . . . . . 
+. . . . . . f b b a b d 1 b 1 d b b b b d d b b c c f . . . . . 
+. . . . . . f b d a b d d b b d b b b b b d b b c c f . . . . . 
+. . . . . f d d d a b b b b b d b b d b b b b d c c f . . . . . 
+. . . . . f b d d a b b b b b d d b d d b b f b b c f . . . . . 
+. . . . f f d b b c b d d b b b b b b b b b b f b c c f . . . . 
+. . . f d d b b b c d d d b b b b b b b b b b b b b c f . . . . 
+. . . f d b b b c c d b b b b b b b b b b b b b a b c f . . . . 
+. . . f b b b b c b b b b b b b b b b b b b b b b b c c f . . . 
+. . . f a b b a c b b d d b b b b b b d b d b b b f c c f . . . 
+. . . f . a b b c b d d b b b b b b b d b d d f b c c c f . . . 
+. . . f c a a b c b b b a b b a b b b b b b d c c c c f . . . . 
+. . . . f f f f f a b b b b a b b b d d b c c c c c f . . . . . 
+. . . . . . . . f a a a b b b b b d d d c c c c f f . . . . . . 
+. . . . . . . . . f f f f f f f f f f f f f f f . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+`, SpriteKind.Clicker)
 forever(function () {
     if (controller.A.isPressed()) {
         animation.runImageAnimation(
