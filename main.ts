@@ -153,7 +153,7 @@ f f . . . . . . . . . . .
             )
             AttackTime = 1
             info.changeScoreBy(1)
-            pause(400)
+            pause(1000)
             AttackTime = 0
         }
     }
