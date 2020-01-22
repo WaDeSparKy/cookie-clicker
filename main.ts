@@ -112,12 +112,14 @@ tiles.setTilemap(tiles.createTilemap(
             [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0],
             TileScale.Sixteen
         ))
+let AttackTime = 0
 info.setScore(0)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
-        animation.runImageAnimation(
-        Pioche,
-        [img`
+        if (AttackTime == 0) {
+            animation.runImageAnimation(
+            Pioche,
+            [img`
 . . . . f f f f f . . . . 
 . e e f 1 1 1 1 1 f . . . 
 . e f 1 1 f f f f . . . . 
@@ -146,10 +148,13 @@ f 1 f . . . . f e f . . .
 f e f . . . . . . . . . . 
 f f . . . . . . . . . . . 
 `],
-        150,
-        false
-        )
-        pause(150)
-        info.changeScoreBy(1)
+            150,
+            false
+            )
+            AttackTime = 1
+            info.changeScoreBy(1)
+            pause(400)
+            AttackTime = 0
+        }
     }
 })
