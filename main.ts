@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const Clicker = SpriteKind.create()
     export const Up1 = SpriteKind.create()
     export const Up2 = SpriteKind.create()
+    export const AnnRoche = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -26,12 +27,17 @@ namespace myTiles {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
     if (info.score() >= 50 && controller.A.isPressed()) {
-        otherSprite.destroy(effects.disintegrate, 500)
-        info.changeScoreBy(-50)
-        DmgSec = 2
+        if (DmgSec == 1) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-50)
+            DmgSec = 2
+        }
     } else {
         UpgradeTime2.say("Price: 50 pts", 200)
     }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, otherSprite) {
+    AnnonceurRoche.say("Mining Area", 200)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up1, function (sprite, otherSprite) {
     if (info.score() >= 25 && controller.A.isPressed()) {
@@ -45,6 +51,41 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up1, function (sprite, otherSpri
 let DmgSec = 0
 let UpgradeTime2: Sprite = null
 let UpgradeTime: Sprite = null
+let AnnonceurRoche: Sprite = null
+AnnonceurRoche = sprites.create(img`
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+`, SpriteKind.AnnRoche)
 let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -125,6 +166,8 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `, SpriteKind.Player)
 controller.moveSprite(Pioche, 100, 100)
+AnnonceurRoche.setPosition(80, 96)
+AnnonceurRoche.setFlag(SpriteFlag.Invisible, true)
 UpgradeTime.setPosition(190, 62)
 UpgradeTime2.setPosition(260, 62)
 scene.cameraFollowSprite(Pioche)
