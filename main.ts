@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const Up1 = SpriteKind.create()
     export const Up2 = SpriteKind.create()
     export const AnnRoche = SpriteKind.create()
+    export const Up3 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -25,12 +26,80 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `
 }
+function Pioche4 () {
+    DmgSec = 2
+    Chance = 5
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 7 7 7 7 7 f e e . 
+. . . . f f f f 7 7 f e . 
+. . . . . . . . f 7 7 f . 
+. . . . . . . f e f 7 7 f 
+. . . . . . f e f . f 7 f 
+. . . . . f e f . . f 7 f 
+. . . . f e f . . . f 7 f 
+. . . f e f . . . . f 7 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
+function Pioche2 () {
+    DmgSec = 1
+    Chance = 2
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 5 5 5 5 5 f e e . 
+. . . . f f f f 5 5 f e . 
+. . . . . . . . f 5 5 f . 
+. . . . . . . f e f 5 5 f 
+. . . . . . f e f . f 5 f 
+. . . . . f e f . . f 5 f 
+. . . . f e f . . . f 5 f 
+. . . f e f . . . . f 5 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
+function Pioche3 () {
+    DmgSec = 2
+    Chance = 3
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 2 2 2 2 2 f e e . 
+. . . . f f f f 2 2 f e . 
+. . . . . . . . f 2 2 f . 
+. . . . . . . f e f 2 2 f 
+. . . . . . f e f . f 2 f 
+. . . . . f e f . . f 2 f 
+. . . . f e f . . . f 2 f 
+. . . f e f . . . . f 2 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSprite) {
+    if (info.score() >= 200 && controller.A.isPressed()) {
+        if (DmgSec == 2) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-200)
+            Pioche4()
+        }
+    } else {
+        UpgradeTime3.say("Price: 200 pts", 200)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
     if (info.score() >= 50 && controller.A.isPressed()) {
         if (DmgSec == 1) {
             otherSprite.destroy(effects.disintegrate, 500)
             info.changeScoreBy(-50)
-            DmgSec = 2
+            Pioche3()
         }
     } else {
         UpgradeTime2.say("Price: 50 pts", 200)
@@ -43,12 +112,31 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up1, function (sprite, otherSpri
     if (info.score() >= 25 && controller.A.isPressed()) {
         otherSprite.destroy(effects.disintegrate, 500)
         info.changeScoreBy(-25)
-        DmgSec = 1
+        Pioche2()
+        UpgradeTime3 = sprites.create(img`
+. . . . f f f f f . . . . 
+. . . f 1 1 1 1 1 f e e . 
+. . . . f f f f 1 1 f e . 
+. . . . . . . . f 1 1 f . 
+. . . 8 . . . f e f 1 1 f 
+. . 8 7 8 . f e f . f 1 f 
+. 8 7 7 7 8 e f . . f 1 f 
+8 7 7 7 7 7 8 . . . f 1 f 
+. 8 7 7 7 8 . . . . f 1 f 
+. 8 7 7 7 8 . . . . . f . 
+. 8 7 7 7 8 . . . . . . . 
+f 8 7 7 7 8 . . . . . . . 
+f f 8 8 8 . . . . . . . . 
+`, SpriteKind.Up3)
+        UpgradeTime3.setPosition(190, 62)
     } else {
         UpgradeTime.say("Price: 25 pts", 200)
     }
 })
+let UpgradeTime3: Sprite = null
+let Chance = 0
 let DmgSec = 0
+let Pioche: Sprite = null
 let UpgradeTime2: Sprite = null
 let UpgradeTime: Sprite = null
 let AnnonceurRoche: Sprite = null
@@ -125,15 +213,15 @@ UpgradeTime = sprites.create(img`
 . . . f 1 1 1 1 1 f e e . 
 . . . . f f f f 1 1 f e . 
 . . . . . . . . f 1 1 f . 
-. . . 9 . . . f e f 1 1 f 
-. . 9 7 9 . f e f . f 1 f 
-. 9 7 7 7 9 e f . . f 1 f 
-9 7 7 7 7 7 9 . . . f 1 f 
-. 9 7 7 7 9 . . . . f 1 f 
-. 9 7 7 7 9 . . . . . f . 
-. 9 7 7 7 9 . . . . . . . 
-f 9 7 7 7 9 . . . . . . . 
-f f 9 9 9 . . . . . . . . 
+. . . 4 . . . f e f 1 1 f 
+. . 4 5 4 . f e f . f 1 f 
+. 4 5 5 5 4 e f . . f 1 f 
+4 5 5 5 5 5 4 . . . f 1 f 
+. 4 5 5 5 4 . . . . f 1 f 
+. 4 5 5 5 4 . . . . . f . 
+. 4 5 5 5 4 . . . . . . . 
+f 4 5 5 5 4 . . . . . . . 
+f f 4 4 4 . . . . . . . . 
 `, SpriteKind.Up1)
 UpgradeTime2 = sprites.create(img`
 . . . . f f f f f . . . . 
@@ -150,7 +238,7 @@ UpgradeTime2 = sprites.create(img`
 f 5 2 2 2 5 . . . . . . . 
 f f 5 5 5 . . . . . . . . 
 `, SpriteKind.Up2)
-let Pioche = sprites.create(img`
+Pioche = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
 . . . . f f f f 1 1 f e . 
@@ -213,6 +301,7 @@ tiles.setTilemap(tiles.createTilemap(
 let AttackTime = 0
 DmgSec = 0
 info.setScore(0)
+Chance = 1
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
@@ -251,7 +340,6 @@ f f . . . . . . . . . . .
             false
             )
             AttackTime = 1
-            info.changeScoreBy(1)
             if (DmgSec == 0) {
                 pause(1000)
             } else if (DmgSec == 1) {
@@ -260,6 +348,17 @@ f f . . . . . . . . . . .
                 pause(250)
             }
             AttackTime = 0
+            if (Math.percentChance(0.001 * Chance)) {
+                info.changeScoreBy(10)
+            } else if (Math.percentChance(0.0005 * Chance)) {
+                info.changeScoreBy(50)
+            } else if (Math.percentChance(0.0001 * Chance)) {
+                info.changeScoreBy(100)
+            } else if (Math.percentChance(0.00001 * Chance)) {
+                info.changeScoreBy(1000)
+            } else {
+                info.changeScoreBy(1)
+            }
         }
     }
 })
