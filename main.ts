@@ -22,21 +22,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `
 }
-let Pioche = sprites.create(img`
-. . . . f f f f f . . . . 
-. . . f 1 1 1 1 1 f e e . 
-. . . . f f f f 1 1 f e . 
-. . . . . . . . e 1 1 f . 
-. . . . . . . e e e 1 1 f 
-. . . . . . e e e . f 1 f 
-. . . . . e e e . . f 1 f 
-. . . . e e e . . . f 1 f 
-. . . e e e . . . . f 1 f 
-. . e e e . . . . . . f . 
-. e e e . . . . . . . . . 
-e e e . . . . . . . . . . 
-e e . . . . . . . . . . . 
-`, SpriteKind.Player)
+let Richesse = 0
 let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -71,6 +57,21 @@ let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `, SpriteKind.Clicker)
+let Pioche = sprites.create(img`
+. . . . f f f f f . . . . 
+. . . f 1 1 1 1 1 f e e . 
+. . . . f f f f 1 1 f e . 
+. . . . . . . . f 1 1 f . 
+. . . . . . . f e f 1 1 f 
+. . . . . . f e f . f 1 f 
+. . . . . f e f . . f 1 f 
+. . . . f e f . . . f 1 f 
+. . . f e f . . . . f 1 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`, SpriteKind.Player)
 controller.moveSprite(Pioche, 100, 100)
 scene.cameraFollowSprite(Pioche)
 tiles.setTilemap(tiles.createTilemap(
@@ -113,29 +114,42 @@ tiles.setTilemap(tiles.createTilemap(
             TileScale.Sixteen
         ))
 forever(function () {
-    if (controller.A.isPressed()) {
+    if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         animation.runImageAnimation(
         Pioche,
         [img`
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . 
-. . . . . . . e e e . . . . . . . 
-. . . . . . . . e . . . . . . . . 
+. . . . f f f f f . . . . 
+. e e f 1 1 1 1 1 f . . . 
+. e f 1 1 f f f f . . . . 
+. f 1 1 f . . . . . . . . 
+f 1 1 f e f . . . . . . . 
+f 1 f . f e f . . . . . . 
+f 1 f . . f e f . . . . . 
+f 1 f . . . f e f . . . . 
+f 1 f . . . . f e f . . . 
+. f . . . . . . f e f . . 
+. . . . . . . . . f e f . 
+. . . . . . . . . . f e f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . f f f f f . . . . 
+. . . f 1 1 1 1 1 f e e . 
+. . . . f f f f 1 1 f e . 
+. . . . . . . . f 1 1 f . 
+. . . . . . . f e f 1 1 f 
+. . . . . . f e f . f 1 f 
+. . . . . f e f . . f 1 f 
+. . . . f e f . . . f 1 f 
+. . . f e f . . . . f 1 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
 `],
-        500,
+        150,
         false
         )
+        Richesse += 1
+        pause(150)
     }
 })
