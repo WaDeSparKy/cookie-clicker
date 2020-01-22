@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const Clicker = SpriteKind.create()
     export const Up1 = SpriteKind.create()
+    export const Up2 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -23,14 +24,27 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
+    if (info.score() >= 50 && controller.A.isPressed()) {
+        otherSprite.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-50)
+        DmgSec = 2
+    } else {
+        UpgradeTime2.say("Price: 50 pts", 200)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up1, function (sprite, otherSprite) {
     if (info.score() >= 25 && controller.A.isPressed()) {
         otherSprite.destroy(effects.disintegrate, 500)
         info.changeScoreBy(-25)
         DmgSec = 1
+    } else {
+        UpgradeTime.say("Price: 25 pts", 200)
     }
 })
 let DmgSec = 0
+let UpgradeTime2: Sprite = null
+let UpgradeTime: Sprite = null
 let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -65,7 +79,7 @@ let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `, SpriteKind.Clicker)
-let UpgradeTime = sprites.create(img`
+UpgradeTime = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
 . . . . f f f f 1 1 f e . 
@@ -80,6 +94,21 @@ let UpgradeTime = sprites.create(img`
 f 9 7 7 7 9 . . . . . . . 
 f f 9 9 9 . . . . . . . . 
 `, SpriteKind.Up1)
+UpgradeTime2 = sprites.create(img`
+. . . . f f f f f . . . . 
+. . . f 1 1 1 1 1 f e e . 
+. . . . f f f f 1 1 f e . 
+. . . . . . . . f 1 1 f . 
+. . . 5 . . . f e f 1 1 f 
+. . 5 2 5 . f e f . f 1 f 
+. 5 2 2 2 5 e f . . f 1 f 
+5 2 2 2 2 2 5 . . . f 1 f 
+. 5 2 2 2 5 . . . . f 1 f 
+. 5 2 2 2 5 . . . . . f . 
+. 5 2 2 2 5 . . . . . . . 
+f 5 2 2 2 5 . . . . . . . 
+f f 5 5 5 . . . . . . . . 
+`, SpriteKind.Up2)
 let Pioche = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
@@ -97,6 +126,7 @@ f f . . . . . . . . . . .
 `, SpriteKind.Player)
 controller.moveSprite(Pioche, 100, 100)
 UpgradeTime.setPosition(190, 62)
+UpgradeTime2.setPosition(260, 62)
 scene.cameraFollowSprite(Pioche)
 tiles.setTilemap(tiles.createTilemap(
             hex`20002000060f05050505050f05050505050f05050505050f05050505050f0505050505070d160a0a0a0a0a0a17160a0a0a0a0a0a0a0a17141414141414141414141414100d04060f05050f070d04060f050505050f070d141414141414141414141414040d040d14141414040d040d141414141414040d141414141414141414141414040d040d14141414040d040d141414141414040d141414141414141414141414040d040b17141416080d040b121714141612080d1414141414141414141414140411190f181414190f1819050518141419050518141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040c1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040c1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040b0a0a0a0a0a120a0a0a0a0a120a0a0a0a0a120a0a0a0a0a120a0a0a0a0a1208`,
@@ -174,18 +204,19 @@ f 1 f . . . . f e f . . .
 f e f . . . . . . . . . . 
 f f . . . . . . . . . . . 
 `],
-            125,
+            100,
             false
             )
             AttackTime = 1
             info.changeScoreBy(1)
             if (DmgSec == 0) {
                 pause(1000)
-                AttackTime = 0
             } else if (DmgSec == 1) {
                 pause(500)
-                AttackTime = 0
+            } else if (DmgSec == 2) {
+                pause(250)
             }
+            AttackTime = 0
         }
     }
 })
