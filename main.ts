@@ -78,34 +78,6 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 1
 }
-function AutoClick2 () {
-    Mineur = sprites.create(img`
-. . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . f f f . . . . . . . . . . . . . 
-. . . . . . f f c b a f f . . . . . . . . . . . 
-. . . . . f a b b c b a c f . . . . . . . . . . 
-. . . . f a b b b a c b a c f . . . . . . . . . 
-. . . . f a b b a a c b a a f . . . . f . . . . 
-. . . . f a a c c c c a c c f . . . f e f . . . 
-. . . . f a a f f f c a f f f . . f 5 5 5 f f . 
-. . . . f c c f 1 7 f f 1 7 f . . f 5 5 5 5 5 f 
-. . . f c a a f e e d d d e f f . f 5 5 5 5 5 f 
-. . f d f f f e e e e e e e e d f . f e f 5 f . 
-. f d d d f f f e e e e e e f d d f e f . f . . 
-f d d d f f f f e e e e e e f d d a e f . . . . 
-f d d d f f f f f e e e e f f d c e d f . . . . 
-f a c f f f f f f f e e f f f f c d d f . . . . 
-f d d f f a a a a c e e c a f f e f f . . . . . 
-. f f f f c c c c c c c c c f . f . . . . . . . 
-. . . . f c c c c c c c c c f . . . . . . . . . 
-. . . . f c c f f f f f c c f . . . . . . . . . 
-. . . . . f f . . . . . f f . . . . . . . . . . 
-`, SpriteKind.Mine)
-    Mineur.setPosition(70, 62)
-    AutoClicker = 2
-}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
     if (info.score() >= 1000 && controller.A.isPressed()) {
         if (Chance == 4) {
@@ -237,8 +209,36 @@ f f f f f . . . . . . . .
         UpgradeTime2.say("Price: 75 pts", 200)
     }
 })
+function AutoClick2 () {
+    Mineur = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . f f f . . . . . . . . . . . . . 
+. . . . . . f f c b a f f . . . . . . . . . . . 
+. . . . . f a b b c b a c f . . . . . . . . . . 
+. . . . f a b b b a c b a c f . . . . . . . . . 
+. . . . f a b b a a c b a a f . . . . f . . . . 
+. . . . f a a c c c c a c c f . . . f e f . . . 
+. . . . f a a f f f c a f f f . . f 5 5 5 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f 5 5 5 5 5 f 
+. . . f c a a f e e d d d e f f . f 5 5 5 5 5 f 
+. . f d f f f e e e e e e e e d f . f e f 5 f . 
+. f d d d f f f e e e e e e f d d f e f . f . . 
+f d d d f f f f e e e e e e f d d a e f . . . . 
+f d d d f f f f f e e e e f f d c e d f . . . . 
+f a c f f f f f f f e e f f f f c d d f . . . . 
+f d d f f a a a a c e e c a f f e f f . . . . . 
+. f f f f c c c c c c c c c f . f . . . . . . . 
+. . . . f c c c c c c c c c f . . . . . . . . . 
+. . . . f c c f f f f f c c f . . . . . . . . . 
+. . . . . f f . . . . . f f . . . . . . . . . . 
+`, SpriteKind.Mine)
+    Mineur.setPosition(70, 62)
+    AutoClicker = 2
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, otherSprite) {
-    if (info.score() >= 10000 && controller.A.isPressed()) {
+    if (Chance >= 4 && (info.score() >= 10000 && controller.A.isPressed())) {
         AnnonceurRoche.destroy(effects.disintegrate, 500)
         info.changeScoreBy(-10000)
         tiles.setTileAt(tiles.getTileLocation(4, 10), sprites.dungeon.darkGroundCenter)
@@ -531,7 +531,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(20000)
+info.setScore(0)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
@@ -774,9 +774,7 @@ f f . . . . . . . . . . .
                 )
             }
             AttackTime = 1
-            if (DmgSec == 2) {
-                pause(250)
-            }
+            pause(250)
             AttackTime = 0
             if (Math.percentChance(0.0005 * Chance)) {
                 info.changeScoreBy(10)
