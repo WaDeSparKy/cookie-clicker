@@ -7,6 +7,7 @@ namespace SpriteKind {
     export const Up4 = SpriteKind.create()
     export const Clicker2 = SpriteKind.create()
     export const Mine = SpriteKind.create()
+    export const AutoCall1 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -73,6 +74,7 @@ f d d f f a a a a c e e c a f f e f f . . . . .
 . . . . f c c f f f f f c c f . . . . . . . . . 
 . . . . . f f . . . . . f f . . . . . . . . . . 
 `, SpriteKind.Mine)
+    Mineur.setPosition(75, 62)
     AutoClicker = 1
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
@@ -84,6 +86,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSpri
         }
     } else {
         UpgradeTime4.say("Price: 1000 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
+    if (info.score() >= 5000 && controller.A.isPressed()) {
+        AutoUpgrade1.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-5000)
+        AutoClick()
+    } else {
+        AutoUpgrade1.say("Price 5000 pts", 200)
     }
 })
 function Pioche3 () {
@@ -233,6 +244,7 @@ let AnnonceurRoche: Sprite = null
 let Pioche: Sprite = null
 let UpgradeTime2: Sprite = null
 let UpgradeTime: Sprite = null
+let AutoUpgrade1: Sprite = null
 let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -301,6 +313,30 @@ let Minerais2 = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `, SpriteKind.Clicker2)
+AutoUpgrade1 = sprites.create(img`
+. . . . . . . . . . . . . . f 1 1 1 1 f . . . . 
+. . . . . . . . . . . . . . . f f f 1 1 f . . . 
+. . . . . . . . . . . . . . . . . . f 1 1 f . . 
+. . . . . . . . f f f . . . . . . f e f 1 1 f . 
+. . . . . . f f c b a f f . . . f e f . f 1 f . 
+. . . . . f a b b c b a c f . f e f . . f 1 f . 
+. . . . f a b b b a c b a c f f f . . . f 1 f . 
+. . . . f a b b a a c b a a f . . . . f . f . . 
+. . . . f a a c c c c a c c f . . . f e f . . . 
+. . . . f a a f f f c a f f f . . f c 1 1 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f c b 1 1 1 f 
+. . . f c a a f e e d d d e f f . f c b 1 1 1 f 
+. . f d f f f e e e e e e e e d f . f e f 1 f . 
+. f d d d f f f e e e e e e f d d f e f . f . . 
+f d d d f f f f e e e e e e f d d a e f . . . . 
+f d d d f f f f f e e e e f f d c e d f . . . . 
+f a c f f f f f f f e e f f f f c d d f . . . . 
+f d d f f a a a a c e e c a f f e f f . . . . . 
+. f f f f c c c c c c c c c f . f . . . . . . . 
+. . . . f c c c c c c c c c f . . . . . . . . . 
+. . . . f c c f f f f f c c f . . . . . . . . . 
+. . . . . f f . . . . . f f . . . . . . . . . . 
+`, SpriteKind.AutoCall1)
 UpgradeTime = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
@@ -382,6 +418,7 @@ f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f
 `, SpriteKind.AnnRoche)
 controller.moveSprite(Pioche, 100, 100)
 UpgradeTime.setPosition(190, 62)
+AutoUpgrade1.setPosition(353, 62)
 UpgradeTime2.setPosition(260, 62)
 Minerais2.setPosition(80, 206)
 AnnonceurRoche.setPosition(80, 170)
