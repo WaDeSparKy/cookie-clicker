@@ -74,29 +74,28 @@ f d d f f a a a a c e e c a f f e f f . . . . .
 . . . . f c c f f f f f c c f . . . . . . . . . 
 . . . . . f f . . . . . f f . . . . . . . . . . 
 `, SpriteKind.Mine)
-    Mineur.setPosition(75, 62)
+    Mineur.setPosition(70, 62)
     AutoClicker = 1
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
-    if (info.score() >= 1000 && controller.A.isPressed()) {
-        if (DmgSec == 2) {
-            otherSprite.destroy(effects.disintegrate, 500)
-            info.changeScoreBy(-1000)
-            Pioche5()
-        }
-    } else {
-        UpgradeTime4.say("Price: 1000 pts", 200)
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
-    if (info.score() >= 5000 && controller.A.isPressed()) {
-        AutoUpgrade1.destroy(effects.disintegrate, 500)
-        info.changeScoreBy(-5000)
-        AutoClick()
-    } else {
-        AutoUpgrade1.say("Price 5000 pts", 200)
-    }
-})
+function Pioche4 () {
+    DmgSec = 2
+    Chance = 4
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 7 7 7 7 7 f e e . 
+. . . . f f f f 7 7 f e . 
+. . . . . . . . f 7 7 f . 
+. . . . . . . f e f 7 7 f 
+. . . . . . f e f . f 7 f 
+. . . . . f e f . . f 7 f 
+. . . . f e f . . . f 7 f 
+. . . f e f . . . . f 7 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
 function Pioche3 () {
     DmgSec = 2
     Chance = 3
@@ -135,6 +134,26 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
+    if (info.score() >= 1000 && controller.A.isPressed()) {
+        if (DmgSec == 2) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-1000)
+            Pioche5()
+        }
+    } else {
+        UpgradeTime4.say("Price: 1000 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
+    if (info.score() >= 5000 && controller.A.isPressed()) {
+        AutoUpgrade1.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-5000)
+        AutoClick()
+    } else {
+        AutoUpgrade1.say("Price 5000 pts", 200)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSprite) {
     if (info.score() >= 200 && controller.A.isPressed()) {
         if (DmgSec == 2) {
@@ -214,25 +233,6 @@ f f 8 8 8 . . . . . . . .
         UpgradeTime.say("Price: 25 pts", 200)
     }
 })
-function Pioche4 () {
-    DmgSec = 2
-    Chance = 4
-    Pioche.setImage(img`
-. . . . f f f f f . . . . 
-. . . f 7 7 7 7 7 f e e . 
-. . . . f f f f 7 7 f e . 
-. . . . . . . . f 7 7 f . 
-. . . . . . . f e f 7 7 f 
-. . . . . . f e f . f 7 f 
-. . . . . f e f . . f 7 f 
-. . . . f e f . . . f 7 f 
-. . . f e f . . . . f 7 f 
-. . f e f . . . . . . f . 
-. f e f . . . . . . . . . 
-f e f . . . . . . . . . . 
-f f . . . . . . . . . . . 
-`)
-}
 let AttackTime = 0
 let UpgradeTime3: Sprite = null
 let UpgradeTime4: Sprite = null
@@ -466,7 +466,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(0)
+info.setScore(100)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
@@ -665,6 +665,64 @@ f f . . . . . . . . . . .
                 info.changeScoreBy(1000)
             } else {
                 info.changeScoreBy(Chance * 1)
+            }
+        }
+    }
+})
+forever(function () {
+    if (controller.A.isPressed() && Pioche.overlapsWith(Minerais2)) {
+        if (AttackTime == 0) {
+            if (Chance == 5) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . f f f f f . . . . 
+. e e f 8 8 8 8 8 f . . . 
+. e f 8 8 f f f f . . . . 
+. f 8 8 f . . . . . . . . 
+f 8 8 f e f . . . . . . . 
+f 8 f . f e f . . . . . . 
+f 8 f . . f e f . . . . . 
+f 8 f . . . f e f . . . . 
+f 8 f . . . . f e f . . . 
+. f . . . . . . f e f . . 
+. . . . . . . . . f e f . 
+. . . . . . . . . . f e f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . f f f f f . . . . 
+. . . f 8 8 8 8 8 f e e . 
+. . . . f f f f 8 8 f e . 
+. . . . . . . . f 8 8 f . 
+. . . . . . . f e f 8 8 f 
+. . . . . . f e f . f 8 f 
+. . . . . f e f . . f 8 f 
+. . . . f e f . . . f 8 f 
+. . . f e f . . . . f 8 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            }
+            AttackTime = 1
+            if (DmgSec == 2) {
+                pause(250)
+            }
+            AttackTime = 0
+            if (Math.percentChance(0.0005 * Chance)) {
+                info.changeScoreBy(10)
+            } else if (Math.percentChance(0.00005 * Chance)) {
+                info.changeScoreBy(50)
+            } else if (Math.percentChance(0.000005 * Chance)) {
+                info.changeScoreBy(100)
+            } else if (Math.percentChance(5e-7 * Chance)) {
+                info.changeScoreBy(1000)
+            } else {
+                info.changeScoreBy(Chance * 5)
             }
         }
     }
