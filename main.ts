@@ -26,19 +26,19 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `
 }
-function Pioche4 () {
-    DmgSec = 2
-    Chance = 4
+function Pioche2 () {
+    DmgSec = 1
+    Chance = 2
     Pioche.setImage(img`
 . . . . f f f f f . . . . 
-. . . f 7 7 7 7 7 f e e . 
-. . . . f f f f 7 7 f e . 
-. . . . . . . . f 7 7 f . 
-. . . . . . . f e f 7 7 f 
-. . . . . . f e f . f 7 f 
-. . . . . f e f . . f 7 f 
-. . . . f e f . . . f 7 f 
-. . . f e f . . . . f 7 f 
+. . . f 5 5 5 5 5 f e e . 
+. . . . f f f f 5 5 f e . 
+. . . . . . . . f 5 5 f . 
+. . . . . . . f e f 5 5 f 
+. . . . . . f e f . f 5 f 
+. . . . . f e f . . f 5 f 
+. . . . f e f . . . f 5 f 
+. . . f e f . . . . f 5 f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
@@ -58,25 +58,6 @@ function Pioche3 () {
 . . . . . f e f . . f 2 f 
 . . . . f e f . . . f 2 f 
 . . . f e f . . . . f 2 f 
-. . f e f . . . . . . f . 
-. f e f . . . . . . . . . 
-f e f . . . . . . . . . . 
-f f . . . . . . . . . . . 
-`)
-}
-function Pioche2 () {
-    DmgSec = 1
-    Chance = 2
-    Pioche.setImage(img`
-. . . . f f f f f . . . . 
-. . . f 5 5 5 5 5 f e e . 
-. . . . f f f f 5 5 f e . 
-. . . . . . . . f 5 5 f . 
-. . . . . . . f e f 5 5 f 
-. . . . . . f e f . f 5 f 
-. . . . . f e f . . f 5 f 
-. . . . f e f . . . f 5 f 
-. . . f e f . . . . f 5 f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
@@ -115,14 +96,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up1, function (sprite, otherSpri
         Pioche2()
         UpgradeTime3 = sprites.create(img`
 . . . . f f f f f . . . . 
-. . . f 1 1 1 1 1 f e e . 
-. . . . f f f f 1 1 f e . 
-. . . . . . . . f 1 1 f . 
-. . . 8 . . . f e f 1 1 f 
-. . 8 7 8 . f e f . f 1 f 
-. 8 7 7 7 8 e f . . f 1 f 
-8 7 7 7 7 7 8 . . . f 1 f 
-. 8 7 7 7 8 . . . . f 1 f 
+. . . f 2 2 2 2 2 f e e . 
+. . . . f f f f 2 2 f e . 
+. . . . . . . . f 2 2 f . 
+. . . 8 . . . f e f 2 2 f 
+. . 8 7 8 . f e f . f 2 f 
+. 8 7 7 7 8 e f . . f 2 f 
+8 7 7 7 7 7 8 . . . f 2 f 
+. 8 7 7 7 8 . . . . f 2 f 
 . 8 7 7 7 8 . . . . . f . 
 . 8 7 7 7 8 . . . . . . . 
 f 8 7 7 7 8 . . . . . . . 
@@ -133,6 +114,25 @@ f f 8 8 8 . . . . . . . .
         UpgradeTime.say("Price: 25 pts", 200)
     }
 })
+function Pioche4 () {
+    DmgSec = 2
+    Chance = 4
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 7 7 7 7 7 f e e . 
+. . . . f f f f 7 7 f e . 
+. . . . . . . . f 7 7 f . 
+. . . . . . . f e f 7 7 f 
+. . . . . . f e f . f 7 f 
+. . . . . f e f . . f 7 f 
+. . . . f e f . . . f 7 f 
+. . . f e f . . . . f 7 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
 let AttackTime = 0
 let UpgradeTime3: Sprite = null
 let Chance = 0
@@ -226,14 +226,14 @@ f f 4 4 4 . . . . . . . .
 `, SpriteKind.Up1)
 UpgradeTime2 = sprites.create(img`
 . . . . f f f f f . . . . 
-. . . f 1 1 1 1 1 f e e . 
-. . . . f f f f 1 1 f e . 
-. . . . . . . . f 1 1 f . 
-. . . 5 . . . f e f 1 1 f 
-. . 5 2 5 . f e f . f 1 f 
-. 5 2 2 2 5 e f . . f 1 f 
-5 2 2 2 2 2 5 . . . f 1 f 
-. 5 2 2 2 5 . . . . f 1 f 
+. . . f 5 5 5 5 5 f e e . 
+. . . . f f f f 5 5 f e . 
+. . . . . . . . f 5 5 f . 
+. . . 5 . . . f e f 5 5 f 
+. . 5 2 5 . f e f . f 5 f 
+. 5 2 2 2 5 e f . . f 5 f 
+5 2 2 2 2 2 5 . . . f 5 f 
+. 5 2 2 2 5 . . . . f 5 f 
 . 5 2 2 2 5 . . . . . f . 
 . 5 2 2 2 5 . . . . . . . 
 f 5 2 2 2 5 . . . . . . . 
@@ -455,16 +455,16 @@ f f . . . . . . . . . . .
                 pause(250)
             }
             AttackTime = 0
-            if (Math.percentChance(0.001 * Chance)) {
+            if (Math.percentChance(0.0001 * Chance)) {
                 info.changeScoreBy(10)
-            } else if (Math.percentChance(0.0001 * Chance)) {
-                info.changeScoreBy(50)
             } else if (Math.percentChance(0.00001 * Chance)) {
-                info.changeScoreBy(100)
+                info.changeScoreBy(50)
             } else if (Math.percentChance(0.000001 * Chance)) {
+                info.changeScoreBy(100)
+            } else if (Math.percentChance(1e-7 * Chance)) {
                 info.changeScoreBy(1000)
             } else {
-                info.changeScoreBy(1)
+                info.changeScoreBy(Chance * 1)
             }
         }
     }
