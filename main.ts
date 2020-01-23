@@ -28,7 +28,7 @@ namespace myTiles {
 }
 function Pioche4 () {
     DmgSec = 2
-    Chance = 5
+    Chance = 4
     Pioche.setImage(img`
 . . . . f f f f f . . . . 
 . . . f 7 7 7 7 7 f e e . 
@@ -39,25 +39,6 @@ function Pioche4 () {
 . . . . . f e f . . f 7 f 
 . . . . f e f . . . f 7 f 
 . . . f e f . . . . f 7 f 
-. . f e f . . . . . . f . 
-. f e f . . . . . . . . . 
-f e f . . . . . . . . . . 
-f f . . . . . . . . . . . 
-`)
-}
-function Pioche2 () {
-    DmgSec = 1
-    Chance = 2
-    Pioche.setImage(img`
-. . . . f f f f f . . . . 
-. . . f 5 5 5 5 5 f e e . 
-. . . . f f f f 5 5 f e . 
-. . . . . . . . f 5 5 f . 
-. . . . . . . f e f 5 5 f 
-. . . . . . f e f . f 5 f 
-. . . . . f e f . . f 5 f 
-. . . . f e f . . . f 5 f 
-. . . f e f . . . . f 5 f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
@@ -77,6 +58,25 @@ function Pioche3 () {
 . . . . . f e f . . f 2 f 
 . . . . f e f . . . f 2 f 
 . . . f e f . . . . f 2 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
+function Pioche2 () {
+    DmgSec = 1
+    Chance = 2
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 5 5 5 5 5 f e e . 
+. . . . f f f f 5 5 f e . 
+. . . . . . . . f 5 5 f . 
+. . . . . . . f e f 5 5 f 
+. . . . . . f e f . f 5 f 
+. . . . . f e f . . f 5 f 
+. . . . f e f . . . f 5 f 
+. . . f e f . . . . f 5 f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
@@ -133,6 +133,7 @@ f f 8 8 8 . . . . . . . .
         UpgradeTime.say("Price: 25 pts", 200)
     }
 })
+let AttackTime = 0
 let UpgradeTime3: Sprite = null
 let Chance = 0
 let DmgSec = 0
@@ -298,16 +299,16 @@ tiles.setTilemap(tiles.createTilemap(
             [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.greenInnerNorthWest,sprites.dungeon.greenInnerNorthEast,sprites.dungeon.greenInnerSouthEast,sprites.dungeon.greenInnerSouthWest],
             TileScale.Sixteen
         ))
-let AttackTime = 0
 DmgSec = 0
 info.setScore(0)
 Chance = 1
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
-            animation.runImageAnimation(
-            Pioche,
-            [img`
+            if (Chance == 1) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
 . . . . f f f f f . . . . 
 . e e f 1 1 1 1 1 f . . . 
 . e f 1 1 f f f f . . . . 
@@ -336,9 +337,115 @@ f 1 f . . . . f e f . . .
 f e f . . . . . . . . . . 
 f f . . . . . . . . . . . 
 `],
-            100,
-            false
-            )
+                100,
+                false
+                )
+            } else if (Chance == 2) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . f f f f f . . . . 
+. e e f 5 5 5 5 5 f . . . 
+. e f 5 5 f f f f . . . . 
+. f 5 5 f . . . . . . . . 
+f 5 5 f e f . . . . . . . 
+f 5 f . f e f . . . . . . 
+f 5 f . . f e f . . . . . 
+f 5 f . . . f e f . . . . 
+f 5 f . . . . f e f . . . 
+. f . . . . . . f e f . . 
+. . . . . . . . . f e f . 
+. . . . . . . . . . f e f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . f f f f f . . . . 
+. . . f 5 5 5 5 5 f e e . 
+. . . . f f f f 5 5 f e . 
+. . . . . . . . f 5 5 f . 
+. . . . . . . f e f 5 5 f 
+. . . . . . f e f . f 5 f 
+. . . . . f e f . . f 5 f 
+. . . . f e f . . . f 5 f 
+. . . f e f . . . . f 5 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            } else if (Chance == 3) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . f f f f f . . . . 
+. e e f 2 2 2 2 2 f . . . 
+. e f 2 2 f f f f . . . . 
+. f 2 2 f . . . . . . . . 
+f 2 2 f e f . . . . . . . 
+f 2 f . f e f . . . . . . 
+f 2 f . . f e f . . . . . 
+f 2 f . . . f e f . . . . 
+f 2 f . . . . f e f . . . 
+. f . . . . . . f e f . . 
+. . . . . . . . . f e f . 
+. . . . . . . . . . f e f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . f f f f f . . . . 
+. . . f 2 2 2 2 2 f e e . 
+. . . . f f f f 2 2 f e . 
+. . . . . . . . f 2 2 f . 
+. . . . . . . f e f 2 2 f 
+. . . . . . f e f . f 2 f 
+. . . . . f e f . . f 2 f 
+. . . . f e f . . . f 2 f 
+. . . f e f . . . . f 2 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            } else if (Chance == 4) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . f f f f f . . . . 
+. e e f 7 7 7 7 7 f . . . 
+. e f 7 7 f f f f . . . . 
+. f 7 7 f . . . . . . . . 
+f 7 7 f e f . . . . . . . 
+f 7 f . f e f . . . . . . 
+f 7 f . . f e f . . . . . 
+f 7 f . . . f e f . . . . 
+f 7 f . . . . f e f . . . 
+. f . . . . . . f e f . . 
+. . . . . . . . . f e f . 
+. . . . . . . . . . f e f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . f f f f f . . . . 
+. . . f 7 7 7 7 7 f e e . 
+. . . . f f f f 7 7 f e . 
+. . . . . . . . f 7 7 f . 
+. . . . . . . f e f 7 7 f 
+. . . . . . f e f . f 7 f 
+. . . . . f e f . . f 7 f 
+. . . . f e f . . . f 7 f 
+. . . f e f . . . . f 7 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            }
             AttackTime = 1
             if (DmgSec == 0) {
                 pause(1000)
@@ -350,11 +457,11 @@ f f . . . . . . . . . . .
             AttackTime = 0
             if (Math.percentChance(0.001 * Chance)) {
                 info.changeScoreBy(10)
-            } else if (Math.percentChance(0.0005 * Chance)) {
-                info.changeScoreBy(50)
             } else if (Math.percentChance(0.0001 * Chance)) {
-                info.changeScoreBy(100)
+                info.changeScoreBy(50)
             } else if (Math.percentChance(0.00001 * Chance)) {
+                info.changeScoreBy(100)
+            } else if (Math.percentChance(0.000001 * Chance)) {
                 info.changeScoreBy(1000)
             } else {
                 info.changeScoreBy(1)
