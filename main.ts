@@ -46,25 +46,6 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `)
 }
-function Pioche5 () {
-    DmgSec = 2
-    Chance = 5
-    Pioche.setImage(img`
-. . . . f f f f f . . . . 
-. . . f c c c c c f e e . 
-. . . . f f f f c c f e . 
-. . . . . . . . f c c f . 
-. . . . . . . f e f c c f 
-. . . . . . f e f . f c f 
-. . . . . f e f . . f c f 
-. . . . f e f . . . f c f 
-. . . f e f . . . . f c f 
-. . f e f . . . . . . f . 
-. f e f . . . . . . . . . 
-f e f . . . . . . . . . . 
-f f . . . . . . . . . . . 
-`)
-}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
     if (info.score() >= 1000 && controller.A.isPressed()) {
         if (DmgSec == 2) {
@@ -73,7 +54,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSpri
             Pioche5()
         }
     } else {
-        UpgradeTime2.say("Price: 50 pts", 200)
+        UpgradeTime4.say("Price: 1000 pts", 200)
     }
 })
 function Pioche3 () {
@@ -95,12 +76,42 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `)
 }
+function Pioche5 () {
+    DmgSec = 2
+    Chance = 5
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f c c c c c f e e . 
+. . . . f f f f c c f e . 
+. . . . . . . . f c c f . 
+. . . . . . . f e f c c f 
+. . . . . . f e f . f c f 
+. . . . . f e f . . f c f 
+. . . . f e f . . . f c f 
+. . . f e f . . . . f c f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSprite) {
     if (info.score() >= 200 && controller.A.isPressed()) {
         if (DmgSec == 2) {
             otherSprite.destroy(effects.disintegrate, 500)
             info.changeScoreBy(-200)
             Pioche4()
+        }
+    } else {
+        UpgradeTime3.say("Price: 200 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
+    if (info.score() >= 50 && controller.A.isPressed()) {
+        if (DmgSec == 1) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-50)
+            Pioche3()
             UpgradeTime4 = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 7 7 7 7 7 f e e . 
@@ -117,17 +128,6 @@ f f c c c f . . . . . . .
 f f f f f . . . . . . . . 
 `, SpriteKind.Up4)
             UpgradeTime4.setPosition(260, 62)
-        }
-    } else {
-        UpgradeTime4.say("Price: 1000 pts", 200)
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
-    if (info.score() >= 50 && controller.A.isPressed()) {
-        if (DmgSec == 1) {
-            otherSprite.destroy(effects.disintegrate, 500)
-            info.changeScoreBy(-50)
-            Pioche3()
         }
     } else {
         UpgradeTime2.say("Price: 50 pts", 200)
