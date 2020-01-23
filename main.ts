@@ -107,10 +107,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSpri
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
-    if (info.score() >= 50 && controller.A.isPressed()) {
+    if (info.score() >= 75 && controller.A.isPressed()) {
         if (DmgSec == 1) {
             otherSprite.destroy(effects.disintegrate, 500)
-            info.changeScoreBy(-50)
+            info.changeScoreBy(-75)
             Pioche3()
             UpgradeTime4 = sprites.create(img`
 . . . . f f f f f . . . . 
@@ -130,7 +130,7 @@ f f f f f . . . . . . . .
             UpgradeTime4.setPosition(260, 62)
         }
     } else {
-        UpgradeTime2.say("Price: 50 pts", 200)
+        UpgradeTime2.say("Price: 75 pts", 200)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, otherSprite) {
