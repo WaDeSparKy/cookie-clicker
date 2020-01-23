@@ -81,14 +81,14 @@ function Pioche5 () {
     Chance = 5
     Pioche.setImage(img`
 . . . . f f f f f . . . . 
-. . . f c c c c c f e e . 
-. . . . f f f f c c f e . 
-. . . . . . . . f c c f . 
-. . . . . . . f e f c c f 
-. . . . . . f e f . f c f 
-. . . . . f e f . . f c f 
-. . . . f e f . . . f c f 
-. . . f e f . . . . f c f 
+. . . f 8 8 8 8 8 f e e . 
+. . . . f f f f 8 8 f e . 
+. . . . . . . . f 8 8 f . 
+. . . . . . . f e f 8 8 f 
+. . . . . . f e f . f 8 f 
+. . . . . f e f . . f 8 f 
+. . . . f e f . . . f 8 f 
+. . . f e f . . . . f 8 f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
@@ -118,13 +118,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSpri
 . . . . f f f f 7 7 f e . 
 . . . . . . . . f 7 7 f . 
 . . . f . . . f e f 7 7 f 
-. . f c f . f e f . f 7 f 
-. f c c c f e f . . f 7 f 
-f c c c c c f . . . f 7 f 
-. f c c c f . . . . f 7 f 
-. f c c c f . . . . . f . 
-. f c c c f . . . . . . . 
-f f c c c f . . . . . . . 
+. . f 8 f . f e f . f 7 f 
+. f 8 8 8 f e f . . f 7 f 
+f 8 8 8 8 8 f . . . f 7 f 
+. f 8 8 8 f . . . . f 7 f 
+. f 8 8 8 f . . . . . f . 
+. f 8 8 8 f . . . . . . . 
+f f 8 8 8 f . . . . . . . 
 f f f f f . . . . . . . . 
 `, SpriteKind.Up4)
             UpgradeTime4.setPosition(260, 62)
@@ -498,28 +498,28 @@ f f . . . . . . . . . . .
                 Pioche,
                 [img`
 . . . . f f f f f . . . . 
-. e e f c c c c c f . . . 
-. e f c c f f f f . . . . 
-. f c c f . . . . . . . . 
-f c c f e f . . . . . . . 
-f c f . f e f . . . . . . 
-f c f . . f e f . . . . . 
-f c f . . . f e f . . . . 
-f c f . . . . f e f . . . 
+. e e f 8 8 8 8 8 f . . . 
+. e f 8 8 f f f f . . . . 
+. f 8 8 f . . . . . . . . 
+f 8 8 f e f . . . . . . . 
+f 8 f . f e f . . . . . . 
+f 8 f . . f e f . . . . . 
+f 8 f . . . f e f . . . . 
+f 8 f . . . . f e f . . . 
 . f . . . . . . f e f . . 
 . . . . . . . . . f e f . 
 . . . . . . . . . . f e f 
 . . . . . . . . . . . f f 
 `,img`
 . . . . f f f f f . . . . 
-. . . f c c c c c f e e . 
-. . . . f f f f c c f e . 
-. . . . . . . . f c c f . 
-. . . . . . . f e f c c f 
-. . . . . . f e f . f c f 
-. . . . . f e f . . f c f 
-. . . . f e f . . . f c f 
-. . . f e f . . . . f c f 
+. . . f 8 8 8 8 8 f e e . 
+. . . . f f f f 8 8 f e . 
+. . . . . . . . f 8 8 f . 
+. . . . . . . f e f 8 8 f 
+. . . . . . f e f . f 8 f 
+. . . . . f e f . . f 8 f 
+. . . . f e f . . . f 8 f 
+. . . f e f . . . . f 8 f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
