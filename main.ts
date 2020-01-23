@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const Up2 = SpriteKind.create()
     export const AnnRoche = SpriteKind.create()
     export const Up3 = SpriteKind.create()
+    export const Up4 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -45,6 +46,36 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `)
 }
+function Pioche5 () {
+    DmgSec = 2
+    Chance = 5
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f c c c c c f e e . 
+. . . . f f f f c c f e . 
+. . . . . . . . f c c f . 
+. . . . . . . f e f c c f 
+. . . . . . f e f . f c f 
+. . . . . f e f . . f c f 
+. . . . f e f . . . f c f 
+. . . f e f . . . . f c f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
+    if (info.score() >= 1000 && controller.A.isPressed()) {
+        if (DmgSec == 2) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-1000)
+            Pioche5()
+        }
+    } else {
+        UpgradeTime2.say("Price: 50 pts", 200)
+    }
+})
 function Pioche3 () {
     DmgSec = 2
     Chance = 3
@@ -70,9 +101,25 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSpri
             otherSprite.destroy(effects.disintegrate, 500)
             info.changeScoreBy(-200)
             Pioche4()
+            UpgradeTime4 = sprites.create(img`
+. . . . f f f f f . . . . 
+. . . f 7 7 7 7 7 f e e . 
+. . . . f f f f 7 7 f e . 
+. . . . . . . . f 7 7 f . 
+. . . f . . . f e f 7 7 f 
+. . f c f . f e f . f 7 f 
+. f c c c f e f . . f 7 f 
+f c c c c c f . . . f 7 f 
+. f c c c f . . . . f 7 f 
+. f c c c f . . . . . f . 
+. f c c c f . . . . . . . 
+f f c c c f . . . . . . . 
+f f f f f . . . . . . . . 
+`, SpriteKind.Up4)
+            UpgradeTime4.setPosition(260, 62)
         }
     } else {
-        UpgradeTime3.say("Price: 200 pts", 200)
+        UpgradeTime4.say("Price: 1000 pts", 200)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
@@ -135,6 +182,7 @@ f f . . . . . . . . . . .
 }
 let AttackTime = 0
 let UpgradeTime3: Sprite = null
+let UpgradeTime4: Sprite = null
 let Chance = 0
 let DmgSec = 0
 let Pioche: Sprite = null
@@ -437,6 +485,41 @@ f 7 f . . . . f e f . . .
 . . . . . f e f . . f 7 f 
 . . . . f e f . . . f 7 f 
 . . . f e f . . . . f 7 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            } else if (Chance == 5) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . f f f f f . . . . 
+. e e f c c c c c f . . . 
+. e f c c f f f f . . . . 
+. f c c f . . . . . . . . 
+f c c f e f . . . . . . . 
+f c f . f e f . . . . . . 
+f c f . . f e f . . . . . 
+f c f . . . f e f . . . . 
+f c f . . . . f e f . . . 
+. f . . . . . . f e f . . 
+. . . . . . . . . f e f . 
+. . . . . . . . . . f e f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . f f f f f . . . . 
+. . . f c c c c c f e e . 
+. . . . f f f f c c f e . 
+. . . . . . . . f c c f . 
+. . . . . . . f e f c c f 
+. . . . . . f e f . f c f 
+. . . . . f e f . . f c f 
+. . . . f e f . . . f c f 
+. . . f e f . . . . f c f 
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
