@@ -5,6 +5,7 @@ namespace SpriteKind {
     export const AnnRoche = SpriteKind.create()
     export const Up3 = SpriteKind.create()
     export const Up4 = SpriteKind.create()
+    export const Clicker2 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -134,7 +135,7 @@ f f f f f . . . . . . . .
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, otherSprite) {
-    AnnonceurRoche.say("Mining Area", 200)
+    AnnonceurRoche.say("Price: 10000 pts", 200)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up1, function (sprite, otherSprite) {
     if (info.score() >= 25 && controller.A.isPressed()) {
@@ -185,44 +186,10 @@ let UpgradeTime3: Sprite = null
 let UpgradeTime4: Sprite = null
 let Chance = 0
 let DmgSec = 0
+let AnnonceurRoche: Sprite = null
 let Pioche: Sprite = null
 let UpgradeTime2: Sprite = null
 let UpgradeTime: Sprite = null
-let AnnonceurRoche: Sprite = null
-AnnonceurRoche = sprites.create(img`
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-`, SpriteKind.AnnRoche)
 let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -247,7 +214,7 @@ let Minerais = sprites.create(img`
 . . . f d b b b c c d b b b b b b b b b b b b b a b c f . . . . 
 . . . f b b b b c b b b b b b b b b b b b b b b b b c c f . . . 
 . . . f a b b a c b b d d b b b b b b d b d b b b f c c f . . . 
-. . . f . a b b c b d d b b b b b b b d b d d f b c c c f . . . 
+. . . f c a b b c b d d b b b b b b b d b d d f b c c c f . . . 
 . . . f c a a b c b b b a b b a b b b b b b d c c c c f . . . . 
 . . . . f f f f f a b b b b a b b b d d b c c c c c f . . . . . 
 . . . . . . . . f a a a b b b b b d d d c c c c f f . . . . . . 
@@ -257,6 +224,40 @@ let Minerais = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `, SpriteKind.Clicker)
+let Minerais2 = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . f f f f f . . . . . . . . . . . . 
+. . . . . . . . . . . . . . f d 4 d d 4 f . . . . . . . . . . . 
+. . . . . . . . . . . . . f d d 4 4 d 4 4 f f . . . . . . . . . 
+. . . . . . . . . . . . . f d d d d 4 d 4 4 e f . . . . . . . . 
+. . . . . . . . . . f f f d 5 5 d d 4 4 4 4 e e f . . . . . . . 
+. . . . . . . . f f d d 4 d 5 5 d 4 4 d 4 4 e e f . . . . . . . 
+. . . . . . . f f 4 4 4 4 d d d 5 d d d 4 4 e e e f . . . . . . 
+. . . . . . . f d d d d d 4 4 d d 5 d 5 5 4 4 e e f . . . . . . 
+. . . . . . f 4 4 d 5 5 d 4 d d d d 5 4 4 4 4 e e f . . . . . . 
+. . . . . . f 4 4 e 4 5 d 4 d d 4 4 5 5 5 4 4 4 e f . . . . . . 
+. . . . . . f 4 4 2 4 5 d 4 d 5 4 4 4 4 5 5 4 4 e e f . . . . . 
+. . . . . . f 4 5 2 4 5 5 4 4 5 4 4 4 4 4 5 4 4 e e f . . . . . 
+. . . . . f 5 5 5 2 4 4 4 4 4 5 4 4 5 4 4 4 4 5 e e f . . . . . 
+. . . . . f e 5 5 2 4 4 4 4 4 5 5 4 5 5 4 4 f 4 4 e f . . . . . 
+. . . . f f 5 4 4 e 4 5 5 4 4 4 4 4 4 4 4 4 4 f 4 e e f . . . . 
+. . . f 5 5 4 4 4 e 5 5 5 4 4 4 4 4 4 4 4 4 4 4 4 4 e f . . . . 
+. . . f 5 4 4 4 e e 5 4 4 4 4 4 4 4 4 4 4 4 4 4 2 4 e f . . . . 
+. . . f 4 4 4 4 e 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 e e f . . . 
+. . . f 2 4 4 2 e 4 4 5 5 4 4 4 4 4 4 5 4 5 4 4 4 f e e f . . . 
+. . . f e 2 4 4 e 4 5 5 4 4 4 4 4 4 4 5 4 5 5 f 4 e e e f . . . 
+. . . f e 2 2 4 e 4 4 4 2 4 4 2 4 4 4 4 4 4 5 e e e e f . . . . 
+. . . . f f f f f 2 4 4 4 4 2 4 4 4 5 5 4 e e e e e f . . . . . 
+. . . . . . . . f 2 2 2 4 4 4 4 4 5 5 5 e e e e f f . . . . . . 
+. . . . . . . . . f f f f f f f f f f f f f f f . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+`, SpriteKind.Clicker2)
 UpgradeTime = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
@@ -302,11 +303,46 @@ Pioche = sprites.create(img`
 f e f . . . . . . . . . . 
 f f . . . . . . . . . . . 
 `, SpriteKind.Player)
+AnnonceurRoche = sprites.create(img`
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+`, SpriteKind.AnnRoche)
 controller.moveSprite(Pioche, 100, 100)
-AnnonceurRoche.setPosition(80, 96)
-AnnonceurRoche.setFlag(SpriteFlag.Invisible, true)
 UpgradeTime.setPosition(190, 62)
 UpgradeTime2.setPosition(260, 62)
+Minerais2.setPosition(80, 206)
+AnnonceurRoche.setPosition(80, 170)
+AnnonceurRoche.setFlag(SpriteFlag.Invisible, true)
 scene.cameraFollowSprite(Pioche)
 tiles.setTilemap(tiles.createTilemap(
             hex`20002000060f05050505050f05050505050f05050505050f05050505050f0505050505070d160a0a0a0a0a0a17160a0a0a0a0a0a0a0a17141414141414141414141414100d04060f05050f070d04060f050505050f070d141414141414141414141414040d040d14141414040d040d141414141414040d141414141414141414141414040d040d14141414040d040d141414141414040d141414141414141414141414040d040b17141416080d040b121714141612080d1414141414141414141414140411190f181414190f1819050518141419050518141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d161217141416121714141414141414141414141414141414141414141414040c040618141419070d141414141414141414141414141414141414141414140411040d14141414040d14141414141414141414141414141414141414141414040d040d14141414040d14141414141414141414141414141414141414141414100d040b120a0a12080d14141414141414141414141414141414141414141414040d190505050505051814141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040c1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040b0a0a0a0a0a120a0a0a0a0a120a0a0a0a0a120a0a0a0a0a120a0a0a0a0a1208`,
