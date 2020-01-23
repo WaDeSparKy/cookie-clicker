@@ -8,6 +8,7 @@ namespace SpriteKind {
     export const Clicker2 = SpriteKind.create()
     export const Mine = SpriteKind.create()
     export const AutoCall1 = SpriteKind.create()
+    export const AutoCall2 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -77,25 +78,89 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 1
 }
-function Pioche4 () {
-    DmgSec = 2
-    Chance = 4
-    Pioche.setImage(img`
-. . . . f f f f f . . . . 
-. . . f 7 7 7 7 7 f e e . 
-. . . . f f f f 7 7 f e . 
-. . . . . . . . f 7 7 f . 
-. . . . . . . f e f 7 7 f 
-. . . . . . f e f . f 7 f 
-. . . . . f e f . . f 7 f 
-. . . . f e f . . . f 7 f 
-. . . f e f . . . . f 7 f 
-. . f e f . . . . . . f . 
-. f e f . . . . . . . . . 
-f e f . . . . . . . . . . 
-f f . . . . . . . . . . . 
-`)
+function AutoClick2 () {
+    Mineur = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . f f f . . . . . . . . . . . . . 
+. . . . . . f f c b a f f . . . . . . . . . . . 
+. . . . . f a b b c b a c f . . . . . . . . . . 
+. . . . f a b b b a c b a c f . . . . . . . . . 
+. . . . f a b b a a c b a a f . . . . f . . . . 
+. . . . f a a c c c c a c c f . . . f e f . . . 
+. . . . f a a f f f c a f f f . . f 5 5 5 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f 5 5 5 5 5 f 
+. . . f c a a f e e d d d e f f . f 5 5 5 5 5 f 
+. . f d f f f e e e e e e e e d f . f e f 5 f . 
+. f d d d f f f e e e e e e f d d f e f . f . . 
+f d d d f f f f e e e e e e f d d a e f . . . . 
+f d d d f f f f f e e e e f f d c e d f . . . . 
+f a c f f f f f f f e e f f f f c d d f . . . . 
+f d d f f a a a a c e e c a f f e f f . . . . . 
+. f f f f c c c c c c c c c f . f . . . . . . . 
+. . . . f c c c c c c c c c f . . . . . . . . . 
+. . . . f c c f f f f f c c f . . . . . . . . . 
+. . . . . f f . . . . . f f . . . . . . . . . . 
+`, SpriteKind.Mine)
+    Mineur.setPosition(70, 62)
+    AutoClicker = 2
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
+    if (info.score() >= 1000 && controller.A.isPressed()) {
+        if (Chance == 4) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-1000)
+            Pioche5()
+        }
+    } else {
+        UpgradeTime4.say("Price: 1000 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
+    if (Chance == 5 && (info.score() >= 5000 && controller.A.isPressed())) {
+        AutoUpgrade1.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-5000)
+        AutoClick()
+        AutoUpgrade2 = sprites.create(img`
+. . . . . . . . . . . . . . . . . f . . . . . . 
+. . . . . . . . . . . . . . . . f 5 f . . . . . 
+. . . . . . . . . . . . . . . f 5 5 5 f . . . . 
+. . . . . . . . f f f . . . f 5 5 5 5 5 f . . . 
+. . . . . . f f c b a f f . . f 5 5 5 f . . . . 
+. . . . . f a b b c b a c f . f 5 5 5 f . . . . 
+. . . . f a b b b a c b a c f f 5 5 5 f . . . . 
+. . . . f a b b a a c b a a f f f f f f . . . . 
+. . . . f a a c c c c a c c f . . . f e f . . . 
+. . . . f a a f f f c a f f f . . f c 1 1 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f c b 1 1 1 f 
+. . . f c a a f e e d d d e f f . f c b 1 1 1 f 
+. . f d f f f e e e e e e e e d f . f e f 1 f . 
+. f d d d f f f e e e e e e f d d f e f . f . . 
+f d d d f f f f e e e e e e f d d a e f . . . . 
+f d d d f f f f f e e e e f f d c e d f . . . . 
+f a c f f f f f f f e e f f f f c d d f . . . . 
+f d d f f a a a a c e e c a f f e f f . . . . . 
+. f f f f c c c c c c c c c f . f . . . . . . . 
+. . . . f c c c c c c c c c f . . . . . . . . . 
+. . . . f c c f f f f f c c f . . . . . . . . . 
+. . . . . f f . . . . . f f . . . . . . . . . . 
+`, SpriteKind.AutoCall2)
+        pause(500)
+        AutoUpgrade2.setPosition(353, 62)
+    } else {
+        AutoUpgrade1.say("Price 5000 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall2, function (sprite, otherSprite) {
+    if (info.score() >= 3000 && controller.A.isPressed()) {
+        AutoUpgrade2.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-3000)
+        AutoClick2()
+    } else {
+        AutoUpgrade2.say("Price 3000 pts", 200)
+    }
+})
 function Pioche3 () {
     DmgSec = 2
     Chance = 3
@@ -134,26 +199,6 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
-    if (info.score() >= 1000 && controller.A.isPressed()) {
-        if (DmgSec == 2) {
-            otherSprite.destroy(effects.disintegrate, 500)
-            info.changeScoreBy(-1000)
-            Pioche5()
-        }
-    } else {
-        UpgradeTime4.say("Price: 1000 pts", 200)
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
-    if (info.score() >= 5000 && controller.A.isPressed()) {
-        AutoUpgrade1.destroy(effects.disintegrate, 500)
-        info.changeScoreBy(-5000)
-        AutoClick()
-    } else {
-        AutoUpgrade1.say("Price 5000 pts", 200)
-    }
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSprite) {
     if (info.score() >= 200 && controller.A.isPressed()) {
         if (DmgSec == 2) {
@@ -233,8 +278,28 @@ f f 8 8 8 . . . . . . . .
         UpgradeTime.say("Price: 25 pts", 200)
     }
 })
+function Pioche4 () {
+    DmgSec = 2
+    Chance = 4
+    Pioche.setImage(img`
+. . . . f f f f f . . . . 
+. . . f 7 7 7 7 7 f e e . 
+. . . . f f f f 7 7 f e . 
+. . . . . . . . f 7 7 f . 
+. . . . . . . f e f 7 7 f 
+. . . . . . f e f . f 7 f 
+. . . . . f e f . . f 7 f 
+. . . . f e f . . . f 7 f 
+. . . f e f . . . . f 7 f 
+. . f e f . . . . . . f . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
 let AttackTime = 0
 let UpgradeTime3: Sprite = null
+let AutoUpgrade2: Sprite = null
 let UpgradeTime4: Sprite = null
 let Mineur: Sprite = null
 let Chance = 0
@@ -466,7 +531,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(100)
+info.setScore(20000)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
