@@ -9,6 +9,7 @@ namespace SpriteKind {
     export const Mine = SpriteKind.create()
     export const AutoCall1 = SpriteKind.create()
     export const AutoCall2 = SpriteKind.create()
+    export const AutoCall3 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -125,12 +126,38 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall2, function (sprite, otherSprite) {
-    if (info.score() >= 3000 && controller.A.isPressed()) {
+    if (info.score() >= 6000 && controller.A.isPressed()) {
         AutoUpgrade2.destroy(effects.disintegrate, 500)
-        info.changeScoreBy(-3000)
+        info.changeScoreBy(-6000)
         AutoClick2()
+        AutoUpgrade3 = sprites.create(img`
+. . . . . . . . . . . . . . . . . f . . . . . . 
+. . . . . . . . . . . . . . . . f 2 f . . . . . 
+. . . . . . . . . . . . . . . f 2 2 2 f . . . . 
+. . . . . . . . f f f . . . f 2 2 2 2 2 f . . . 
+. . . . . . f f c b a f f . . f 2 2 2 f . . . . 
+. . . . . f a b b c b a c f . f 2 2 2 f . . . . 
+. . . . f a b b b a c b a c f f 2 2 2 f . . . . 
+. . . . f a b b a a c b a a f f f f f f . . . . 
+. . . . f a a c c c c a c c f . . . f e f . . . 
+. . . . f a a f f f c a f f f . . f 4 5 5 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f 4 4 5 5 5 f 
+. . . f c a a f e e d d d e f f . f 4 4 5 5 5 f 
+. . f d f f f e e e e e e e e d f . f e f 5 f . 
+. f d d d f f f e e e e e e f d d f e f . f . . 
+f d d d f f f f e e e e e e f d d a e f . . . . 
+f d d d f f f f f e e e e f f d c e d f . . . . 
+f a c f f f f f f f e e f f f f c d d f . . . . 
+f d d f f a a a a c e e c a f f e f f . . . . . 
+. f f f f c c c c c c c c c f . f . . . . . . . 
+. . . . f c c c c c c c c c f . . . . . . . . . 
+. . . . f c c f f f f f c c f . . . . . . . . . 
+. . . . . f f . . . . . f f . . . . . . . . . . 
+`, SpriteKind.AutoCall3)
+        pause(500)
+        AutoUpgrade3.setPosition(353, 62)
     } else {
-        AutoUpgrade2.say("Price 3000 pts", 200)
+        AutoUpgrade2.say("Price 6000 pts", 200)
     }
 })
 function Pioche3 () {
@@ -220,9 +247,9 @@ function AutoClick2 () {
 . . . . f a b b b a c b a c f . . . . . . . . . 
 . . . . f a b b a a c b a a f . . . . f . . . . 
 . . . . f a a c c c c a c c f . . . f e f . . . 
-. . . . f a a f f f c a f f f . . f 5 5 5 f f . 
-. . . . f c c f 1 7 f f 1 7 f . . f 5 5 5 5 5 f 
-. . . f c a a f e e d d d e f f . f 5 5 5 5 5 f 
+. . . . f a a f f f c a f f f . . f 4 5 5 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f 4 4 5 5 5 f 
+. . . f c a a f e e d d d e f f . f 4 4 5 5 5 f 
 . . f d f f f e e e e e e e e d f . f e f 5 f . 
 . f d d d f f f e e e e e e f d d f e f . f . . 
 f d d d f f f f e e e e e e f d d a e f . . . . 
@@ -299,6 +326,7 @@ f f . . . . . . . . . . .
 }
 let AttackTime = 0
 let UpgradeTime3: Sprite = null
+let AutoUpgrade3: Sprite = null
 let AutoUpgrade2: Sprite = null
 let UpgradeTime4: Sprite = null
 let Mineur: Sprite = null
