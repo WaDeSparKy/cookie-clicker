@@ -79,6 +79,34 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 1
 }
+function AutoClick3 () {
+    Mineur = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . f f f . . . . . . . . . . . . . 
+. . . . . . f f c b a f f . . . . . . . . . . . 
+. . . . . f a b b c b a c f . . . . . . . . . . 
+. . . . f a b b b a c b a c f . . . . . . . . . 
+. . . . f a b b a a c b a a f . . . . f . . . . 
+. . . . f a a c c c c a c c f . . . f e f . . . 
+. . . . f a a f f f c a f f f . . f a 2 2 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f a a 2 2 2 f 
+. . . f c a a f e e d d d e f f . f a a 2 2 2 f 
+. . f d f f f e e e e e e e e d f . f e f 2 f . 
+. f d d d f f f e e e e e e f d d f e f . f . . 
+f d d d f f f f e e e e e e f d d a e f . . . . 
+f d d d f f f f f e e e e f f d c e d f . . . . 
+f a c f f f f f f f e e f f f f c d d f . . . . 
+f d d f f a a a a c e e c a f f e f f . . . . . 
+. f f f f c c c c c c c c c f . f . . . . . . . 
+. . . . f c c c c c c c c c f . . . . . . . . . 
+. . . . f c c f f f f f c c f . . . . . . . . . 
+. . . . . f f . . . . . f f . . . . . . . . . . 
+`, SpriteKind.Mine)
+    Mineur.setPosition(70, 62)
+    AutoClicker = 3
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
     if (info.score() >= 1000 && controller.A.isPressed()) {
         if (Chance == 4) {
@@ -207,6 +235,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSpri
         }
     } else {
         UpgradeTime3.say("Price: 200 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall3, function (sprite, otherSprite) {
+    if (info.score() >= 7500 && controller.A.isPressed()) {
+        otherSprite.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-7500)
+        AutoClick3()
+    } else {
+        AutoUpgrade3.say("Price: 7500 pts", 200)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
@@ -559,7 +596,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(0)
+info.setScore(30000)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
