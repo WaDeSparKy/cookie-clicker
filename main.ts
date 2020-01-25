@@ -79,6 +79,17 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 1
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
+    if (info.score() >= 1000 && controller.A.isPressed()) {
+        if (Chance == 4) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-1000)
+            Pioche5()
+        }
+    } else {
+        UpgradeTime4.say("Price: 1000 pts", 200)
+    }
+})
 function AutoClick3 () {
     Mineur = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -107,17 +118,6 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 3
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
-    if (info.score() >= 1000 && controller.A.isPressed()) {
-        if (Chance == 4) {
-            otherSprite.destroy(effects.disintegrate, 500)
-            info.changeScoreBy(-1000)
-            Pioche5()
-        }
-    } else {
-        UpgradeTime4.say("Price: 1000 pts", 200)
-    }
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
     if (Chance == 5 && (info.score() >= 5000 && controller.A.isPressed())) {
         AutoUpgrade1.destroy(effects.disintegrate, 500)
@@ -596,7 +596,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(30000)
+info.setScore(0)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
