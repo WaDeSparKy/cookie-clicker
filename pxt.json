@@ -2,7 +2,9 @@
     "name": "Cookie Clicker",
     "dependencies": {
         "device": "*",
-        "animation": "*"
+        "animation": "*",
+        "color": "*",
+        "palette": "*"
     },
     "description": "",
     "files": [

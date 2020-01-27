@@ -34,6 +34,25 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `
 }
+function Pioche6 () {
+    DmgSec = 2
+    Chance = 10
+    Pioche.setImage(img`
+. . . . 1 1 1 1 1 . . . . 
+. . . 1 . . . . . 1 e e . 
+. . . . 1 1 1 1 . . 1 e . 
+. . . . . . . . 1 . . 1 . 
+. . . . . . . f e 1 . . 1 
+. . . . . . f e f . 1 . 1 
+. . . . . f e f . . 1 . 1 
+. . . . f e f . . . 1 . 1 
+. . . f e f . . . . 1 . 1 
+. . f e f . . . . . . 1 . 
+. f e f . . . . . . . . . 
+f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`)
+}
 function Pioche2 () {
     DmgSec = 1
     Chance = 2
@@ -103,9 +122,9 @@ function AutoClick3 () {
 . . . . f a b b b a c b a c f . . . . . . . . . 
 . . . . f a b b a a c b a a f . . . . f . . . . 
 . . . . f a a c c c c a c c f . . . f e f . . . 
-. . . . f a a f f f c a f f f . . f a 2 2 f f . 
-. . . . f c c f 1 7 f f 1 7 f . . f a a 2 2 2 f 
-. . . f c a a f e e d d d e f f . f a a 2 2 2 f 
+. . . . f a a f f f c a f f f . . f 4 2 2 f f . 
+. . . . f c c f 1 7 f f 1 7 f . . f 4 4 2 2 2 f 
+. . . f c a a f e e d d d e f f . f 4 4 2 2 2 f 
 . . f d f f f e e e e e e e e d f . f e f 2 f . 
 . f d d d f f f e e e e e e f d d f e f . f . . 
 f d d d f f f f e e e e e e f d d a e f . . . . 
@@ -121,7 +140,7 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     AutoClicker = 3
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
-    if (Chance == 5 && (info.score() >= 5000 && controller.A.isPressed())) {
+    if (Chance >= 5 && (info.score() >= 5000 && controller.A.isPressed())) {
         AutoUpgrade1.destroy(effects.disintegrate, 500)
         info.changeScoreBy(-5000)
         AutoClick()
@@ -237,6 +256,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSpri
         }
     } else {
         UpgradeTime3.say("Price: 200 pts", 200)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up5, function (sprite, otherSprite) {
+    if (info.score() >= 20000 && controller.A.isPressed()) {
+        if (DmgSec == 2) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-20000)
+            Pioche6()
+        }
+    } else {
+        UpgradeTime5.say("Price: 20000 pts", 200)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall3, function (sprite, otherSprite) {
@@ -391,6 +421,7 @@ let AutoClicker = 0
 let AnnonceurPioche: Sprite = null
 let AnnonceurRoche: Sprite = null
 let Pioche: Sprite = null
+let UpgradeTime5: Sprite = null
 let UpgradeTime2: Sprite = null
 let UpgradeTime: Sprite = null
 let AutoUpgrade1: Sprite = null
@@ -516,14 +547,14 @@ UpgradeTime2 = sprites.create(img`
 f 5 2 2 2 5 . . . . . . . 
 f f 5 5 5 . . . . . . . . 
 `, SpriteKind.Up2)
-let UpgradeTime5 = sprites.create(img`
+UpgradeTime5 = sprites.create(img`
 . . . . 1 1 1 1 1 . . . . 
-. . . 1 . . . . . 1 e e . 
-. . . . 1 1 1 1 . . 1 e . 
-. . . . . . . . f . . 1 . 
-. . . c . . . f e f . . 1 
-. . c 8 c . f e f . 1 . 1 
-. c 8 8 8 c e f . . 1 . 1 
+. . . 1 . . . . . 1 b b . 
+. . . . 1 1 1 1 . . 1 b . 
+. . . . . . . . 1 . . 1 . 
+. . . c . . . f b 1 . . 1 
+. . c 8 c . f b f . 1 . 1 
+. c 8 8 8 c b f . . 1 . 1 
 c 8 8 8 8 8 c . . . 1 . 1 
 . c 8 8 8 c . . . . 1 . 1 
 . c 8 8 8 c . . . . . 1 . 
@@ -903,6 +934,41 @@ f 8 f . . . . f e f . . .
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            } else if (Chance == 10) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . 1 1 1 1 1 . . . . 
+. b b 1 . . . . . 1 . . . 
+. b 1 . . 1 1 1 1 . . . . 
+. 1 . . 1 . . . . . . . . 
+1 . . 1 b f . . . . . . . 
+1 . 1 . f b f . . . . . . 
+1 . 1 . . f b f . . . . . 
+1 . 1 . . . f b f . . . . 
+1 . 1 . . . . f b f . . . 
+. 1 . . . . . . f b f . . 
+. . . . . . . . . f b f . 
+. . . . . . . . . . f b f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . 1 1 1 1 1 . . . . 
+. . . 1 . . . . . 1 b b . 
+. . . . 1 1 1 1 . . 1 b . 
+. . . . . . . . 1 . . 1 . 
+. . . . . . . f b 1 . . 1 
+. . . . . . f b f . 1 . 1 
+. . . . . f b f . . 1 . 1 
+. . . . f b f . . . 1 . 1 
+. . . f b f . . . . 1 . 1 
+. . f b f . . . . . . 1 . 
+. f b f . . . . . . . . . 
+f b f . . . . . . . . . . 
 f f . . . . . . . . . . . 
 `],
                 100,
