@@ -698,7 +698,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(100000)
+info.setScore(0)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
