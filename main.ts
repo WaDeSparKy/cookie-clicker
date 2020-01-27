@@ -11,6 +11,7 @@ namespace SpriteKind {
     export const AutoCall2 = SpriteKind.create()
     export const AutoCall3 = SpriteKind.create()
     export const AnnPioche = SpriteKind.create()
+    export const Up5 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -515,6 +516,21 @@ UpgradeTime2 = sprites.create(img`
 f 5 2 2 2 5 . . . . . . . 
 f f 5 5 5 . . . . . . . . 
 `, SpriteKind.Up2)
+let UpgradeTime5 = sprites.create(img`
+. . . . 1 1 1 1 1 . . . . 
+. . . 1 . . . . . 1 e e . 
+. . . . 1 1 1 1 . . 1 e . 
+. . . . . . . . f . . 1 . 
+. . . c . . . f e f . . 1 
+. . c 8 c . f e f . 1 . 1 
+. c 8 8 8 c e f . . 1 . 1 
+c 8 8 8 8 8 c . . . 1 . 1 
+. c 8 8 8 c . . . . 1 . 1 
+. c 8 8 8 c . . . . . 1 . 
+. c 8 8 8 c . . . . . . . 
+f c 8 8 8 c . . . . . . . 
+f f c c c . . . . . . . . 
+`, SpriteKind.Up5)
 Pioche = sprites.create(img`
 . . . . f f f f f . . . . 
 . . . f 1 1 1 1 1 f e e . 
@@ -602,6 +618,7 @@ controller.moveSprite(Pioche, 100, 100)
 UpgradeTime.setPosition(190, 62)
 AutoUpgrade1.setPosition(353, 62)
 UpgradeTime2.setPosition(260, 62)
+UpgradeTime5.setPosition(190, 208)
 Minerais2.setPosition(80, 206)
 AnnonceurRoche.setPosition(80, 170)
 AnnonceurPioche.setPosition(224, 170)
