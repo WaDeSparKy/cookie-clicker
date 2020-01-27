@@ -10,6 +10,7 @@ namespace SpriteKind {
     export const AutoCall1 = SpriteKind.create()
     export const AutoCall2 = SpriteKind.create()
     export const AutoCall3 = SpriteKind.create()
+    export const AnnPioche = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -246,6 +247,22 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall3, function (sprite, oth
         AutoUpgrade3.say("Price: 7500 pts", 200)
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnPioche, function (sprite, otherSprite) {
+    if (Chance >= 4 && (info.score() >= 20000 && controller.A.isPressed())) {
+        AnnonceurPioche.destroy(effects.disintegrate, 500)
+        info.changeScoreBy(-20000)
+        tiles.setTileAt(tiles.getTileLocation(13, 11), sprites.dungeon.darkGroundCenter)
+        tiles.setWallAt(tiles.getTileLocation(13, 11), false)
+        tiles.setTileAt(tiles.getTileLocation(14, 11), sprites.dungeon.darkGroundCenter)
+        tiles.setWallAt(tiles.getTileLocation(14, 11), false)
+        tiles.setTileAt(tiles.getTileLocation(13, 10), sprites.dungeon.darkGroundCenter)
+        tiles.setWallAt(tiles.getTileLocation(13, 10), false)
+        tiles.setTileAt(tiles.getTileLocation(14, 10), sprites.dungeon.darkGroundCenter)
+        tiles.setWallAt(tiles.getTileLocation(14, 10), false)
+    } else {
+        AnnonceurPioche.say("Price: 20000 pts", 200)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up2, function (sprite, otherSprite) {
     if (info.score() >= 75 && controller.A.isPressed()) {
         if (DmgSec == 1) {
@@ -370,6 +387,7 @@ let Mineur: Sprite = null
 let Chance = 0
 let DmgSec = 0
 let AutoClicker = 0
+let AnnonceurPioche: Sprite = null
 let AnnonceurRoche: Sprite = null
 let Pioche: Sprite = null
 let UpgradeTime2: Sprite = null
@@ -546,7 +564,7 @@ f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 `, SpriteKind.AnnRoche)
-let AnnonceurPioche = sprites.create(img`
+AnnonceurPioche = sprites.create(img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -579,7 +597,7 @@ let AnnonceurPioche = sprites.create(img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-`, SpriteKind.AnnRoche)
+`, SpriteKind.AnnPioche)
 controller.moveSprite(Pioche, 100, 100)
 UpgradeTime.setPosition(190, 62)
 AutoUpgrade1.setPosition(353, 62)
@@ -588,7 +606,7 @@ Minerais2.setPosition(80, 206)
 AnnonceurRoche.setPosition(80, 170)
 AnnonceurPioche.setPosition(224, 170)
 AnnonceurRoche.setFlag(SpriteFlag.Invisible, true)
-AnnonceurPioche.setFlag(SpriteFlag.Invisible, false)
+AnnonceurPioche.setFlag(SpriteFlag.Invisible, true)
 scene.cameraFollowSprite(Pioche)
 tiles.setTilemap(tiles.createTilemap(
             hex`20002000060f05050505050f05050505050f05050505050f05050505050f0505050505070d160a0a0a0a0a0a17160a0a0a0a0a0a0a0a17160a0a0a0a17160a0a0a0a17100d04060f05050f070d04060f050505050f070d04060505070d04060505070d040d040d14141414040d040d141414141414040d040d1414040d040d1414040d040d040d14141414040d040d141414141414040d04111414100d04111414100d040d040b17141416080d040b121714141612080d040d1414040d040d1414040d0411190f181414190f1819050518141419050518191814141918191814141918040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1612171617161217160a0a171617160a0a17141414141414141414141414040c040618191819070d04060f181918190f070d1414141414141414141414140411040d14141414040d040d141414141414040d141414141414141414141414040d040d14141414040d040d141414141414040d141414141414141414141414100d040b120a0a12080d040b120a0a0a0a12080d141414141414141414141414040d190505050505051819050505050505050518141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040c1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414100d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d141414141414141414141414141414141414141414141414141414141414040d1414141414141414141414141414141414141414141414141414141414140411141414141414141414141414141414141414141414141414141414141414040b0a0a0a0a0a120a0a0a0a0a120a0a0a0a0a120a0a0a0a0a120a0a0a0a0a1208`,
@@ -626,13 +644,13 @@ tiles.setTilemap(tiles.createTilemap(
 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 `,
-            [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.greenInnerNorthWest,sprites.dungeon.greenInnerNorthEast,sprites.dungeon.greenInnerSouthEast,sprites.dungeon.greenInnerSouthWest,sprites.dungeon.darkGroundSouthEast0,sprites.dungeon.greenOuterNorth1],
+            [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.greenInnerNorthWest,sprites.dungeon.greenInnerNorthEast,sprites.dungeon.greenInnerSouthEast,sprites.dungeon.greenInnerSouthWest,sprites.dungeon.darkGroundSouthEast0,sprites.dungeon.greenOuterNorth1,sprites.castle.tilePath1,sprites.castle.tilePath2],
             TileScale.Sixteen
         ))
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(0)
+info.setScore(10000000)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
