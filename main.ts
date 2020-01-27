@@ -698,7 +698,7 @@ tiles.setTilemap(tiles.createTilemap(
 AutoClicker = 0
 DmgSec = 0
 Chance = 1
-info.setScore(0)
+info.setScore(100000)
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
@@ -872,6 +872,41 @@ f 8 f . . . . f e f . . .
 . . f e f . . . . . . f . 
 . f e f . . . . . . . . . 
 f e f . . . . . . . . . . 
+f f . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
+            } else if (Chance == 10) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . 1 1 1 1 1 . . . . 
+. b b 1 . . . . . 1 . . . 
+. b 1 . . 1 1 1 1 . . . . 
+. 1 . . 1 . . . . . . . . 
+1 . . 1 b f . . . . . . . 
+1 . 1 . f b f . . . . . . 
+1 . 1 . . f b f . . . . . 
+1 . 1 . . . f b f . . . . 
+1 . 1 . . . . f b f . . . 
+. 1 . . . . . . f b f . . 
+. . . . . . . . . f b f . 
+. . . . . . . . . . f b f 
+. . . . . . . . . . . f f 
+`,img`
+. . . . 1 1 1 1 1 . . . . 
+. . . 1 . . . . . 1 b b . 
+. . . . 1 1 1 1 . . 1 b . 
+. . . . . . . . 1 . . 1 . 
+. . . . . . . f b 1 . . 1 
+. . . . . . f b f . 1 . 1 
+. . . . . f b f . . 1 . 1 
+. . . . f b f . . . 1 . 1 
+. . . f b f . . . . 1 . 1 
+. . f b f . . . . . . 1 . 
+. f b f . . . . . . . . . 
+f b f . . . . . . . . . . 
 f f . . . . . . . . . . . 
 `],
                 100,
