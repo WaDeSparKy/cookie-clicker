@@ -401,6 +401,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, othe
     if (Chance >= 4 && (info.score() >= 10000 && controller.A.isPressed())) {
         AnnonceurRoche.destroy(effects.disintegrate, 500)
         info.changeScoreBy(-10000)
+        tiles.setWallAt(tiles.getTileLocation(17, 4), false)
+        tiles.setWallAt(tiles.getTileLocation(17, 3), false)
         tiles.setTileAt(tiles.getTileLocation(4, 10), sprites.dungeon.darkGroundCenter)
         tiles.setWallAt(tiles.getTileLocation(4, 10), false)
         tiles.setTileAt(tiles.getTileLocation(5, 10), sprites.dungeon.darkGroundCenter)
@@ -744,8 +746,8 @@ tiles.setTilemap(tiles.createTilemap(
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 
-2 2 2 . . . . 2 2 2 2 . . . . . . . . . 2 . . 2 2 2 2 . . 2 2 2 
-2 2 2 . . . . 2 2 2 2 . . . . . . . . . 2 . . 2 2 2 2 . . 2 2 2 
+2 2 2 . . . . 2 2 2 2 . . . . . . 2 . . 2 . . 2 2 2 2 . . 2 2 2 
+2 2 2 . . . . 2 2 2 2 . . . . . . 2 . . 2 . . 2 2 2 2 . . 2 2 2 
 2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 
 2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 
 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 
