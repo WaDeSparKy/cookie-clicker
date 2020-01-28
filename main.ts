@@ -34,6 +34,44 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `
+    //% blockIdentity=images._tile
+    export const tile1 = img`
+c c c c c c c c c c c c c c c c 
+c c c c c c c c c c c c c c c c 
+c e e e e e e e e e e e e e e e 
+e e f f f f f f f f f f f f f f 
+e f f f f f f f f f f f f f f f 
+e f f 2 2 f f 2 f f f f 2 2 f f 
+e f 2 f f 2 f 2 f f f 2 f f 2 f 
+e f 2 f f f f 2 f f f 2 f f 2 f 
+e f 2 f f f f 2 f f f 2 f f 2 f 
+e f 2 f f 2 f 2 f f f 2 f f 2 f 
+e f f 2 2 f f 2 2 2 f f 2 2 f f 
+e f f f f f f f f f f f f f f f 
+e e f f f f f f f f f f f f f f 
+c e e e e e e e e e e e e e e e 
+c c c c c c c c c c c c c c c c 
+c c c c c c c c c c c c c c c c 
+`
+    //% blockIdentity=images._tile
+    export const tile2 = img`
+c c c c c c c c c c c c c c c c 
+c c c c c c c c c c c c c c c c 
+e e e e e e e e e e e e e e e c 
+f f f f f f f f f f f f f f e e 
+f f f f f f f f f f f f f f f e 
+f f 2 2 2 f 2 2 2 f 2 2 2 f f e 
+f 2 f f f f 2 f f f 2 f f 2 f e 
+f f 2 2 f f 2 f f f 2 f f 2 f e 
+f f f f 2 f 2 2 f f 2 f f 2 f e 
+f f f f 2 f 2 f f f 2 f f 2 f e 
+f 2 2 2 f f 2 2 2 f 2 2 2 f f e 
+f f f f f f f f f f f f f f f e 
+f f f f f f f f f f f f f f e e 
+e e e e e e e e e e e e e e e c 
+c c c c c c c c c c c c c c c c 
+c c c c c c c c c c c c c c c c 
+`
 }
 function Pioche6 () {
     DmgSec = 2
@@ -401,6 +439,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, othe
     if (Chance >= 4 && (info.score() >= 10000 && controller.A.isPressed())) {
         AnnonceurRoche.destroy(effects.disintegrate, 500)
         info.changeScoreBy(-10000)
+        tiles.setTileAt(tiles.getTileLocation(4, 6), myTiles.tile1)
+        tiles.setTileAt(tiles.getTileLocation(5, 6), myTiles.tile2)
+        tiles.setWallAt(tiles.getTileLocation(4, 6), true)
+        tiles.setWallAt(tiles.getTileLocation(5, 6), true)
         tiles.setWallAt(tiles.getTileLocation(17, 4), false)
         tiles.setWallAt(tiles.getTileLocation(17, 3), false)
         tiles.setTileAt(tiles.getTileLocation(4, 10), sprites.dungeon.darkGroundCenter)
@@ -776,7 +818,7 @@ tiles.setTilemap(tiles.createTilemap(
 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 `,
-            [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.greenInnerNorthWest,sprites.dungeon.greenInnerNorthEast,sprites.dungeon.greenInnerSouthEast,sprites.dungeon.greenInnerSouthWest,sprites.dungeon.darkGroundSouthEast0,sprites.dungeon.greenOuterNorth1,sprites.castle.tilePath1,sprites.castle.tilePath2],
+            [myTiles.tile0,sprites.castle.tileGrass3,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.dungeon.greenOuterEast0,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterSouth1,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterWest1,sprites.dungeon.greenOuterWest0,sprites.castle.tileDarkGrass1,sprites.dungeon.greenOuterNorth2,sprites.dungeon.greenOuterEast2,sprites.dungeon.greenOuterWest2,sprites.dungeon.greenOuterSouth2,sprites.castle.tilePath5,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.greenInnerNorthWest,sprites.dungeon.greenInnerNorthEast,sprites.dungeon.greenInnerSouthEast,sprites.dungeon.greenInnerSouthWest,sprites.dungeon.darkGroundSouthEast0,sprites.dungeon.greenOuterNorth1,sprites.castle.tilePath1,sprites.castle.tilePath2,myTiles.tile1,myTiles.tile2],
             TileScale.Sixteen
         ))
 AutoClicker = 0
@@ -1097,37 +1139,6 @@ f f . . . . . . . . . . .
                 animation.runImageAnimation(
                 Pioche,
                 [img`
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . f f . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . f f f . . . f f . . . . . . 
-. . . . . . . . . . . . . . . . . f f f . f 1 1 f . . . . . 
-. . . . . . . . . . . . . . . . . f f 1 f f f 1 1 f . . . . 
-. . . . . . . . . . . . . . . . . f f f 1 f f f 1 f . . . . 
-. . . . . . . . . . . . . . f f . . f f 1 f 1 f f . . . . . 
-. . . . . . . . . . . . . . f f f . f f f 1 1 f 1 f . . . . 
-. . . . . . . . . . . . . . . f f f 1 1 f 1 f f 1 1 f . . . 
-. . . . . . . . . . . . . . . f f f f 1 1 f f f 1 f 1 f . . 
-. . . . . . . . . . . . . . . . f f 1 f f f 1 1 f f 1 f . . 
-. . . . . . . . . . . . . . . . f 1 f . . f f f f 1 1 1 f . 
-. . . . . . . . . . . . . . . f 1 f . . . . f f f 1 f 1 f . 
-. . . . . . . . . . . . . f f f f . . . . . . f f f f 1 f . 
-. . . . . . . . . . . . f f 1 f . . . . . . . f f f f f 1 f 
-. . . . . . . . . . . . f 1 f f . . . . . . . . f f f f 1 f 
-. . . . . . . . . . . f f f f . . . . . . . . . f f f f 1 f 
-. . . . . . . . . . f 1 f . . . . . . . . . . . f f f f 1 f 
-. . . . . . . . . f 1 f . . . . . . . . . . . . . f f 1 f . 
-. . . . . . . . f 1 f . . . . . . . . . . . . . . f f 1 f . 
-. . . . . . . f 1 f . . . . . . . . . . . . . . . f f 1 f . 
-. . . . . . f 1 f . . . . . . . . . . . . . . . . f 1 f . . 
-. . . . . f 1 f . . . . . . . . . . . . . . . . f f 1 f . . 
-. . . . f 1 f . . . . . . . . . . . . . . . . . f 1 f . . . 
-. . f f f f . . . . . . . . . . . . . . . . . f 1 f . . . . 
-f f f 1 f . . . . . . . . . . . . . . . . . f f f . . . . . 
-f 1 1 f f . . . . . . . . . . . . . . . . . . . . . . . . . 
-f 1 1 f . . . . . . . . . . . . . . . . . . . . . . . . . . 
-f f f f . . . . . . . . . . . . . . . . . . . . . . . . . . 
-`,img`
 . . . . . . . . . . . . . . . f f f f . . . . . . . . . . . 
 . . . . . . . . . . . . f f f 1 1 1 1 f f f . . . . . . . . 
 . . . . . . . . . . f f 1 1 1 f f f f 1 1 1 f f . . . . . . 
@@ -1158,6 +1169,37 @@ f f f f . . . . . . . . . . . . . . . . . . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . . . . . . . f f 1 1 f 
 . . . . . . . . . . . . . . . . . . . . . . . . . . f 1 1 f 
 . . . . . . . . . . . . . . . . . . . . . . . . . . f f f f 
+`,img`
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . f f . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . f f f . . . f f . . . . . . 
+. . . . . . . . . . . . . . . . . f f f . f 1 1 f . . . . . 
+. . . . . . . . . . . . . . . . . f f 1 f f f 1 1 f . . . . 
+. . . . . . . . . . . . . . . . . f f f 1 f f f 1 f . . . . 
+. . . . . . . . . . . . . . f f . . f f 1 f 1 f f . . . . . 
+. . . . . . . . . . . . . . f f f . f f f 1 1 f 1 f . . . . 
+. . . . . . . . . . . . . . . f f f 1 1 f 1 f f 1 1 f . . . 
+. . . . . . . . . . . . . . . f f f f 1 1 f f f 1 f 1 f . . 
+. . . . . . . . . . . . . . . . f f 1 f f f 1 1 f f 1 f . . 
+. . . . . . . . . . . . . . . . f 1 f . . f f f f 1 1 1 f . 
+. . . . . . . . . . . . . . . f 1 f . . . . f f f 1 f 1 f . 
+. . . . . . . . . . . . . f f f f . . . . . . f f f f 1 f . 
+. . . . . . . . . . . . f f 1 f . . . . . . . f f f f f 1 f 
+. . . . . . . . . . . . f 1 f f . . . . . . . . f f f f 1 f 
+. . . . . . . . . . . f f f f . . . . . . . . . f f f f 1 f 
+. . . . . . . . . . f 1 f . . . . . . . . . . . f f f f 1 f 
+. . . . . . . . . f 1 f . . . . . . . . . . . . . f f 1 f . 
+. . . . . . . . f 1 f . . . . . . . . . . . . . . f f 1 f . 
+. . . . . . . f 1 f . . . . . . . . . . . . . . . f f 1 f . 
+. . . . . . f 1 f . . . . . . . . . . . . . . . . f 1 f . . 
+. . . . . f 1 f . . . . . . . . . . . . . . . . f f 1 f . . 
+. . . . f 1 f . . . . . . . . . . . . . . . . . f 1 f . . . 
+. . f f f f . . . . . . . . . . . . . . . . . f 1 f . . . . 
+f f f 1 f . . . . . . . . . . . . . . . . . f f f . . . . . 
+f 1 1 f f . . . . . . . . . . . . . . . . . . . . . . . . . 
+f 1 1 f . . . . . . . . . . . . . . . . . . . . . . . . . . 
+f f f f . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `],
                 100,
                 false
