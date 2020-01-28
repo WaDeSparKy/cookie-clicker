@@ -13,6 +13,7 @@ namespace SpriteKind {
     export const AnnPioche = SpriteKind.create()
     export const Up5 = SpriteKind.create()
     export const Special = SpriteKind.create()
+    export const Up6 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -655,6 +656,24 @@ c 8 8 8 8 8 c . . . 1 . 1
 f c 8 8 8 c . . . . . . . 
 f f c c c . . . . . . . . 
 `, SpriteKind.Up5)
+let UpgradeTime6 = sprites.create(img`
+. . 5 5 5 5 . . . . . . . . 8 . 
+. 5 4 4 4 4 5 . . . 5 . . 8 6 8 
+. . 5 5 4 5 6 8 . 5 4 5 . . 8 . 
+. . . . 5 5 8 6 8 5 4 5 . . . . 
+. . . . . . . 8 6 5 4 4 5 5 . . 
+. . . . . . . 5 5 4 4 4 4 4 5 . 
+. . . . . . . . 5 4 4 5 5 5 . . 
+. . . 1 . . . f 6 5 5 6 8 . . . 
+. . 1 . 1 . f 6 f . 5 8 6 8 . . 
+. 1 . . . 1 6 f . . . . 8 6 5 . 
+1 . . . f 6 1 . . . . . 5 5 4 5 
+. 1 . f 6 1 . . . . . . 5 4 4 5 
+. 1 f 6 f 1 . . . . . . . 5 4 5 
+. 1 6 f . 1 . . . . . . . 5 4 5 
+f 1 f . . 1 . . . . . . . . 5 . 
+f f 1 1 1 . . . . . . . . . . . 
+`, SpriteKind.Up6)
 SpecialUpgrade = sprites.create(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -776,6 +795,7 @@ UpgradeTime.setPosition(190, 62)
 AutoUpgrade1.setPosition(353, 62)
 UpgradeTime2.setPosition(260, 62)
 UpgradeTime5.setPosition(190, 208)
+UpgradeTime6.setPosition(260, 208)
 Minerais2.setPosition(80, 206)
 AnnonceurRoche.setPosition(80, 170)
 AnnonceurPioche.setPosition(224, 170)
