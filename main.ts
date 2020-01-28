@@ -887,7 +887,7 @@ f e f . . . . . . . . . .
 f f . . . . . . . . . . . 
 `],
                 100,
-                true
+                false
                 )
             } else if (Chance == 4) {
                 animation.runImageAnimation(
