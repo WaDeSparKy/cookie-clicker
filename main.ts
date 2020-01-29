@@ -140,6 +140,28 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 1
 }
+function Pioche7 () {
+    DmgSec = 2
+    Chance = 20
+    Pioche.setImage(img`
+. . 5 5 5 5 . . . . . . . . 8 . 
+. 5 4 4 4 4 5 . . . 5 . . 8 6 8 
+. . 5 5 4 5 6 8 . 5 4 5 . . 8 . 
+. . . . 5 5 8 6 8 5 4 5 . . . . 
+. . . . . . . 8 6 5 4 4 5 5 . . 
+. . . . . . . 5 5 4 4 4 4 4 5 . 
+. . . . . . . . 5 4 4 5 5 5 . . 
+. . . . . . . f 6 5 5 6 8 . . . 
+. . . . . . f 6 f . 5 8 6 8 . . 
+. . . . . f 6 f . . . . 8 6 5 . 
+. . . . f 6 f . . . . . 5 5 4 5 
+. . . f 6 f . . . . . . 5 4 4 5 
+. . f 6 f . . . . . . . . 5 4 5 
+. f 6 f . . . . . . . . . 5 4 5 
+f 6 f . . . . . . . . . . . 5 . 
+f f . . . . . . . . . . . . . . 
+`)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSprite) {
     if (info.score() >= 1000 && controller.A.isPressed()) {
         if (Chance == 4) {
@@ -190,6 +212,17 @@ f d d f f a a a a c e e c a f f e f f . . . . .
     Mineur.setPosition(70, 62)
     AutoClicker = 3
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Up6, function (sprite, otherSprite) {
+    if (info.score() >= 50000 && controller.A.isPressed()) {
+        if (Chance == 10) {
+            otherSprite.destroy(effects.disintegrate, 500)
+            info.changeScoreBy(-50000)
+            Pioche7()
+        }
+    } else {
+        UpgradeTime6.say("Price: 50000 pts", 200)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.AutoCall1, function (sprite, otherSprite) {
     if (Chance >= 5 && (info.score() >= 5000 && controller.A.isPressed())) {
         AutoUpgrade1.destroy(effects.disintegrate, 500)
@@ -311,7 +344,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up3, function (sprite, otherSpri
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Up5, function (sprite, otherSprite) {
     if (info.score() >= 20000 && controller.A.isPressed()) {
-        if (DmgSec == 2) {
+        if (Chance == 5) {
             otherSprite.destroy(effects.disintegrate, 500)
             info.changeScoreBy(-20000)
             Pioche6()
@@ -515,6 +548,7 @@ let AnnonceurPioche: Sprite = null
 let AnnonceurRoche: Sprite = null
 let Pioche: Sprite = null
 let SpecialUpgrade: Sprite = null
+let UpgradeTime6: Sprite = null
 let UpgradeTime5: Sprite = null
 let UpgradeTime2: Sprite = null
 let UpgradeTime: Sprite = null
@@ -656,7 +690,7 @@ c 8 8 8 8 8 c . . . 1 . 1
 f c 8 8 8 c . . . . . . . 
 f f c c c . . . . . . . . 
 `, SpriteKind.Up5)
-let UpgradeTime6 = sprites.create(img`
+UpgradeTime6 = sprites.create(img`
 . . 5 5 5 5 . . . . . . . . 8 . 
 . 5 4 4 4 4 5 . . . 5 . . 8 6 8 
 . . 5 5 4 5 6 8 . 5 4 5 . . 8 . 
@@ -1224,12 +1258,53 @@ f f f f . . . . . . . . . . . . . . . . . . . . . . . . . .
                 100,
                 false
                 )
+            } else if (Chance == 20) {
+                animation.runImageAnimation(
+                Pioche,
+                [img`
+. . . . . . . . . . 5 5 5 5 . . 
+. . . . . 5 . . . 5 4 4 4 4 5 . 
+. . . . 5 4 5 . 8 6 5 4 5 5 . . 
+. . . . 5 4 5 8 6 8 5 5 . . . . 
+. . 5 5 4 4 5 6 8 . . . . . . . 
+. 5 4 4 4 4 4 5 5 . . . . . . . 
+. . 5 5 5 4 4 5 . . . . . . . . 
+. . . 8 6 5 5 6 f . . . . . . . 
+. . 8 6 8 5 . f 6 f . . . . . . 
+. 5 6 8 . . . . f 6 f . . . . . 
+5 4 5 5 . . . . . f 6 f . . . . 
+5 4 4 5 . . . . . . f 6 f . . . 
+5 4 5 . . . . . . . . f 6 f . . 
+5 4 5 . . . . . . . . . f 6 f . 
+. 5 . . . . . . . . . . . f 6 f 
+. . . . . . . . . . . . . . f f 
+`,img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+f . . . . . . . . . . . . . . . 
+f f . . . . . . . . . . . . . . 
+`],
+                100,
+                false
+                )
             }
             AttackTime = 1
             pause(250)
             AttackTime = 0
             if (Math.percentChance(0.0005 * Chance)) {
-                info.changeScoreBy(10)
+                info.changeScoreBy(3 * Chance)
             } else if (Math.percentChance(0.00005 * Chance)) {
                 info.changeScoreBy(50)
             } else if (Math.percentChance(0.000005 * Chance)) {
