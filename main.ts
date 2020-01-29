@@ -1074,7 +1074,7 @@ f f . . . . . . . . . . .
                 info.changeScoreBy(50)
             } else if (Math.percentChance(0.000001 * Chance)) {
                 info.changeScoreBy(100)
-            } else if (Math.percentChance(1e-7 * Chance)) {
+            } else if (Math.percentChance(1e-10 * Chance)) {
                 info.changeScoreBy(1000)
             } else {
                 info.changeScoreBy(Chance * 1)
@@ -1234,9 +1234,9 @@ f f f f . . . . . . . . . . . . . . . . . . . . . . . . . .
                 info.changeScoreBy(50)
             } else if (Math.percentChance(0.000005 * Chance)) {
                 info.changeScoreBy(100)
-            } else if (Math.percentChance(5e-7 * Chance)) {
+            } else if (Math.percentChance(5e-10 * Chance)) {
                 info.changeScoreBy(1000)
-            } else if (Math.percentChance(5e-12 * Chance)) {
+            } else if (Math.percentChance(5e-50 * Chance)) {
                 info.changeScoreBy(10000)
             } else {
                 info.changeScoreBy(Chance * 5)
