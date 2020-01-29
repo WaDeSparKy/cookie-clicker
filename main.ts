@@ -152,11 +152,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Up4, function (sprite, otherSpri
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Special, function (sprite, otherSprite) {
-    if (info.score() >= 75000 && controller.A.isPressed()) {
+    if (info.score() >= 100000 && controller.A.isPressed()) {
         if (DmgSec == 2) {
             otherSprite.destroy(effects.disintegrate, 500)
             Special1()
-            info.changeScoreBy(-75000)
+            info.changeScoreBy(-100000)
         }
     } else {
         SpecialUpgrade.say("?????", 200)
@@ -380,7 +380,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnPioche, function (sprite, oth
 })
 function Special1 () {
     DmgSec = 2
-    Chance = 30
+    Chance = 50
     Pioche.setImage(img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -477,8 +477,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.AnnRoche, function (sprite, othe
         tiles.setTileAt(tiles.getTileLocation(5, 6), myTiles.tile2)
         tiles.setWallAt(tiles.getTileLocation(4, 6), true)
         tiles.setWallAt(tiles.getTileLocation(5, 6), true)
-        tiles.setWallAt(tiles.getTileLocation(17, 4), false)
-        tiles.setWallAt(tiles.getTileLocation(17, 3), false)
         tiles.setTileAt(tiles.getTileLocation(4, 10), sprites.dungeon.darkGroundCenter)
         tiles.setWallAt(tiles.getTileLocation(4, 10), false)
         tiles.setTileAt(tiles.getTileLocation(5, 10), sprites.dungeon.darkGroundCenter)
@@ -841,10 +839,10 @@ tiles.setTilemap(tiles.createTilemap(
             img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 
-2 2 2 . . . . 2 2 2 2 . . . . . . 2 . . 2 . . 2 2 2 2 . . 2 2 2 
-2 2 2 . . . . 2 2 2 2 . . . . . . 2 . . 2 . . 2 2 2 2 . . 2 2 2 
-2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 . . . . 2 2 2 2 . . . . . . 2 . . 2 . . 2 2 2 2 . . 2 . . 
+2 2 2 . . . . 2 2 2 2 . . . . . . 2 . . 2 . . 2 2 2 2 . . . . . 
+2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 . . 2 2 2 2 . . . . . 
 2 2 2 2 . . 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 
 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 
 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 
@@ -879,6 +877,19 @@ AutoClicker = 0
 DmgSec = 0
 Chance = 1
 info.setScore(0)
+game.onUpdate(function () {
+    if (controller.B.isPressed() && Chance >= 20) {
+        tiles.setWallAt(tiles.getTileLocation(17, 4), false)
+        tiles.setWallAt(tiles.getTileLocation(17, 3), false)
+        tiles.setWallAt(tiles.getTileLocation(31, 2), false)
+        tiles.setWallAt(tiles.getTileLocation(30, 2), false)
+    } else {
+        tiles.setWallAt(tiles.getTileLocation(17, 4), true)
+        tiles.setWallAt(tiles.getTileLocation(17, 3), true)
+        tiles.setWallAt(tiles.getTileLocation(31, 2), true)
+        tiles.setWallAt(tiles.getTileLocation(30, 2), true)
+    }
+})
 forever(function () {
     if (controller.A.isPressed() && Pioche.overlapsWith(Minerais)) {
         if (AttackTime == 0) {
@@ -1189,7 +1200,7 @@ f f . . . . . . . . . . .
                 100,
                 false
                 )
-            } else if (Chance == 30) {
+            } else if (Chance == 50) {
                 animation.runImageAnimation(
                 Pioche,
                 [img`
